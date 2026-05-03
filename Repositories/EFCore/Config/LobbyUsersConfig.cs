@@ -23,7 +23,7 @@ namespace Repositories.EFCore.Config
 
             builder.HasOne(lu => lu.MessageLobby)
                 .WithMany()
-                .HasForeignKey(lu => lu.MessageLobiId)
+                .HasForeignKey(lu => lu.MessageLobbyId)
                 .OnDelete(DeleteBehavior.Cascade); // Lobi silinirse tüm üyelik kayıtları uçsun
         }
     }
