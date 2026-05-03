@@ -1,0 +1,35 @@
+﻿using Entities.Models;
+using Microsoft.EntityFrameworkCore;
+using Repositories.EFCore.Config;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Repositories.EFCore
+{
+    public class RepositoriesContext : DbContext
+    {
+        public RepositoriesContext(DbContextOptions options) : base(options)
+        {
+            
+        }
+
+        public DbSet<User> Users { get; set; } //Users Tablosu
+        public DbSet<MessageLobby> MessageLobby { get; set; } //Mesaj lobilerinin tutulduğu tablo
+        public DbSet<Message> Messages { get; set; } //Mesajların tutulduğu tablo
+        public DbSet<LobbyUsers> LobbyUsers { get; set; } //Lobi kullanıcılarının tutulduğu tablo
+
+
+        //İlgili veritabanı tablolarının konfig dosyaları
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            //Configurasyonları ayrı dosyalarda tuttuk.
+            modelBuilder.ApplyConfiguration(new UserConfig());
+            modelBuilder.ApplyConfiguration(new MessageLobbyConfig());
+            modelBuilder.ApplyConfiguration(new MessageConfig());
+            modelBuilder.ApplyConfiguration(new LobbyUsersConfig());
+        }
+    }
+}

@@ -1,4 +1,9 @@
 
+using API.Extensions;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
+using Repositories.EFCore;
+
 namespace API
 {
     public class Program
@@ -29,6 +34,14 @@ namespace API
                 });
             });
 
+
+
+            //Servis kayýtlarý
+            //---------------------------------------------------------------//
+            builder.Services.ConfigureSqlContext(builder.Configuration);
+            builder.Services.ConfigureRepositoryManager();
+            builder.Services.ConfigureServiceManager();
+            //---------------------------------------------------------------//
 
 
             var app = builder.Build();

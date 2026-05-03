@@ -25,6 +25,9 @@ namespace Entities.Models
         {
             UserId = Guid.NewGuid();
             CreateDate = DateTime.Now;
+
+            //LobiUsers = getLobiUserData(); --> çağırıldığında fonksiyon tetiklenerek getirilsin diyebiliriz.
+            //Messages = getMessagesData(); --> çağırıldığında fonksiyon tetiklenerek getirilsin diyebiliriz.
         }
     }
 }
