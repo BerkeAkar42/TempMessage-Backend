@@ -15,7 +15,12 @@ namespace Repositories.EFCore.Config
         {
             builder.HasKey(ml => ml.MessageLobbyId); //PK
             builder.Property(ml => ml.Name)
-                .HasMaxLength(100); // Lobi adı max 100 karakter olabilir.
+                .HasMaxLength(100)
+                .IsRequired(); // Lobi adı max 100 karakter olabilir.
+            builder.Property(u => u.CreateDate)
+                .IsRequired(); //Boş olamaz.
+            builder.Property(u => u.ValidityPeriod)
+                .IsRequired(); //Boş olamaz.
             builder.Property(ml => ml.IsActive)
                 .HasDefaultValue(true); //Lobi açıldığında otomatik olarak true yazsın (yani lobi aktif)
         }

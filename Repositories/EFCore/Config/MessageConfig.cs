@@ -14,7 +14,11 @@ namespace Repositories.EFCore.Config
         public void Configure(EntityTypeBuilder<Message> builder)
         {
             builder.HasKey(m => m.MessageId); //PK
-            
+            builder.Property(u => u.Content)
+                .IsRequired(); //Boş olamaz.
+            builder.Property(u => u.SendDate)
+                .IsRequired(); //Boş olamaz.
+
             //FK Tanımlamaları
             builder.HasOne(m => m.User)
                 .WithMany()

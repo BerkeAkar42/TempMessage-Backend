@@ -17,10 +17,12 @@ namespace Repositories.EFCore.Config
             builder.Property(u => u.NickName)
                 .IsRequired() //Boş olamaz.
                 .HasMaxLength(50);
-            builder.Property(u => u.Password)
+            builder.Property(u => u.AccessKey)
                 .IsRequired(); //Boş olamaz.
-            builder.Property(u => u.IsActive)
-            .HasDefaultValue(true); // Yeni kullanıcı varsayılan olarak aktif başlasın
+            builder.Property(u => u.CreateDate)
+                .IsRequired(); //Boş olamaz.
+            builder.Property(u => u.LastActiveDate)
+                .IsRequired(); //Boş olamaz.
         }
     }
 }

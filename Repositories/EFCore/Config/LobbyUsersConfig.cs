@@ -14,6 +14,8 @@ namespace Repositories.EFCore.Config
         public void Configure(EntityTypeBuilder<LobbyUsers> builder)
         {
             builder.HasKey(lu => lu.LobbyUsersId); //PK
+            builder.Property(u => u.JoinedDate)
+                .IsRequired(); //Boş olamaz.
 
             //FK Tanımlamaları
             builder.HasOne(lu => lu.User)
