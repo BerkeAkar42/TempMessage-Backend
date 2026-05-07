@@ -8,23 +8,20 @@ namespace Entities.Models
 {
     public class User
     {
-        public Guid UserId { get; init; }
+        public Guid UserId { get; init; } // Herkesin görebildiği Public ID
         public string NickName { get; set; }
-        public string Password { get; set; }
+        public string AccessKey { get; set; } // Şifre yerine geçecek gizli anahtar. Sadece sahibinde (LocalStorage) durur.
         public DateTime CreateDate { get; init; }
-        public bool IsActive { get; set; }
         public DateTime LastActiveDate { get; set; }
 
-        // Navigation Properties (İlişkiler)
-        //public ICollection<LobiUsers> LobiUsers { get; set; }
-        //public ICollection<Message> Messages { get; set; }
-        //Bu gelen veriler için ayrıca bir servis yazılabilir
-
+        public bool IsOnline => (DateTime.Now - LastActiveDate).TotalMinutes < 5;
 
         public User()
         {
-            UserId = Guid.NewGuid();
+            UserId = Guid.NewGuid(); // e02aa315-a436-41b9-92f4-5c3abb19d2ae
+            AccessKey = Guid.NewGuid().ToString("N"); // e02aa315a43641b992f45c3abb19d2ae
             CreateDate = DateTime.Now;
+            LastActiveDate = DateTime.Now;
         }
     }
 }
