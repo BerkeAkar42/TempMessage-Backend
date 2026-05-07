@@ -18,8 +18,8 @@ namespace Entities.Models
 
         public User()
         {
-            UserId = Guid.NewGuid();
-            AccessKey = Guid.NewGuid().ToString("N"); // Tahmin edilemez benzersiz anahtar
+            UserId = Guid.NewGuid(); // e02aa315-a436-41b9-92f4-5c3abb19d2ae
+            AccessKey = Guid.NewGuid().ToString("N"); // e02aa315a43641b992f45c3abb19d2ae
             CreateDate = DateTime.Now;
             LastActiveDate = DateTime.Now;
         }
