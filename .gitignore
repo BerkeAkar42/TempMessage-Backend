@@ -532,4 +532,11 @@ obj/
 /node_modules
 /wwwroot/node_modules
 
+
+# NLog günlük dosyalarını görmezden gel
+logs/
+internal_logs/
+*.log
+
+
 # End of https://www.toptal.com/developers/gitignore/api/csharp,dotnetcore,aspnetcore
