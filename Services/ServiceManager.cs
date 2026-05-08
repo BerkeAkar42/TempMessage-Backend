@@ -1,4 +1,5 @@
-﻿using Repositories.Contracts;
+﻿using AutoMapper;
+using Repositories.Contracts;
 using Services.Contracts;
 using System;
 using System.Collections.Generic;
@@ -15,12 +16,12 @@ namespace Services
         private readonly Lazy<IMessageService> _messageService;
         private readonly Lazy<IUserService> _userService;
 
-        public ServiceManager(IRepositoryManager repositoryManager)
+        public ServiceManager(IRepositoryManager repositoryManager, IMapper mapper)
         {
-            _lobbyUsersService = new Lazy<ILobbyUsersService>(() => new LobbyUsersManager(repositoryManager));
-            _messageLobbyService = new Lazy<IMessageLobbyService>(() => new MessageLobbyManager(repositoryManager));
-            _messageService = new Lazy<IMessageService>(() => new MessageManager(repositoryManager));
-            _userService = new Lazy<IUserService>(() => new UserManager(repositoryManager));
+            _lobbyUsersService = new Lazy<ILobbyUsersService>(() => new LobbyUsersManager(repositoryManager, mapper));
+            _messageLobbyService = new Lazy<IMessageLobbyService>(() => new MessageLobbyManager(repositoryManager, mapper));
+            _messageService = new Lazy<IMessageService>(() => new MessageManager(repositoryManager, mapper));
+            _userService = new Lazy<IUserService>(() => new UserManager(repositoryManager, mapper));
         }
 
         public ILobbyUsersService LobbyUsersService => _lobbyUsersService.Value;

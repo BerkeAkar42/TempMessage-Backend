@@ -1,4 +1,5 @@
-﻿using Repositories.Contracts;
+﻿using AutoMapper;
+using Repositories.Contracts;
 using Services.Contracts;
 using System;
 using System.Collections.Generic;
@@ -11,10 +12,12 @@ namespace Services
     public class LobbyUsersManager : ILobbyUsersService
     {
         private readonly IRepositoryManager _manager;
+        private readonly IMapper _mapper;
 
-        public LobbyUsersManager(IRepositoryManager manager)
+        public LobbyUsersManager(IRepositoryManager manager, IMapper mapper)
         {
             _manager = manager;
+            _mapper = mapper;
         }
     }
 }
