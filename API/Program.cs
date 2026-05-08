@@ -46,6 +46,7 @@ namespace API
 
 
             var app = builder.Build();
+            //app.ConfigureExceptionHandler(); //Global Hata Yönetimi
 
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())
