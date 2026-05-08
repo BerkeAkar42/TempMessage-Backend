@@ -5,6 +5,7 @@ using Microsoft.Extensions.Configuration;
 using NLog;
 using Repositories.EFCore;
 using Services.Contracts;
+using System.Reflection;
 
 namespace API
 {
@@ -22,7 +23,13 @@ namespace API
 
             builder.Services.AddControllers();
             // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
-            builder.Services.AddOpenApi();
+            builder.Services.AddEndpointsApiExplorer(); //Swagger Kurulumu
+            builder.Services.AddSwaggerGen(options => //Bu aþama Swagger üzerindeki API'lerin ayrýntýlý bilgilerini vermemize yarayacak.
+            {
+                var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+                var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
+                options.IncludeXmlComments(xmlPath);
+            }); //Swagger Kurulumu
 
             //------------------------------------
             //Authentication => Kullanýcýnýn kim olduðunu bulur (örn JWT, cookie, header vs.)
@@ -61,7 +68,8 @@ namespace API
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())
             {
-                app.MapOpenApi();
+                app.UseSwagger(); //Swagger Kurulumu
+                app.UseSwaggerUI(); //Swagger Kurulumu
             }
 
             app.UseHttpsRedirection();
@@ -72,7 +80,7 @@ namespace API
             app.UseCors("AllowLocalHost");
 
             app.MapControllers();
-
+            
             app.Run();
         }
     }
