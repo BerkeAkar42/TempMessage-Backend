@@ -2,7 +2,9 @@
 using API.Extensions;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
+using NLog;
 using Repositories.EFCore;
+using Services.Contracts;
 
 namespace API
 {
@@ -11,6 +13,10 @@ namespace API
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
+
+            //NLOG Kurulumu
+            LogManager.Setup().LoadConfigurationFromFile(string.Concat(Directory.GetCurrentDirectory(), "/nlog.config"));
+
 
             // Add services to the container.
 
@@ -38,15 +44,19 @@ namespace API
 
             //Servis kayýtlarý
             //---------------------------------------------------------------//
-            builder.Services.ConfigureSqlContext(builder.Configuration);
-            builder.Services.ConfigureRepositoryManager();
-            builder.Services.ConfigureServiceManager();
-            builder.Services.AddAutoMapper(typeof(Program));
+            builder.Services.ConfigureSqlContext(builder.Configuration); //SQL Connection String
+            builder.Services.ConfigureRepositoryManager(); //Repository Manager
+            builder.Services.ConfigureServiceManager(); //Service Manager
+            builder.Services.AddAutoMapper(typeof(Program)); //Mapper
+            builder.Services.ConfigureLoggerService(); //NLOG
             //---------------------------------------------------------------//
 
 
             var app = builder.Build();
-            //app.ConfigureExceptionHandler(); //Global Hata Yönetimi
+
+            //Program.cs de constructor olmadýðý için buradan nesnenin atamasýný yapýyoruz
+            var logger = app.Services.GetRequiredService<ILoggerService>();
+            app.ConfigureExceptionHandler(logger); //Global Hata Yönetimi
 
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())
