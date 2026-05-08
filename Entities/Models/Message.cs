@@ -11,7 +11,7 @@ namespace Entities.Models
         public Guid MessageId { get; init; }
         public string Content { get; set; }
         public DateTime SendDate { get; init; }
-        public bool IsEdited { get; set; }
+        public bool IsEdited { get; set; } //Update isteği geldiği sırada logic içerisinde true olacak bir proptur.
         public DateTime UpdateDate { get; set; }
 
         //FK tanımalamaları

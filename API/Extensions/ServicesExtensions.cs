@@ -3,6 +3,8 @@ using Microsoft.AspNetCore.Mvc.Formatters;
 using Microsoft.EntityFrameworkCore;
 using Repositories.Contracts;
 using Repositories.EFCore;
+using Services;
+using Services.Contracts;
 
 namespace API.Extensions
 {
@@ -16,6 +18,7 @@ namespace API.Extensions
 
 
         //this olduğu için o parametreyi vermek zorunda değiliz.
+        // Repo imzalarının bulunduğu interface tanımlaamsı
         public static void ConfigureRepositoryManager(this IServiceCollection services)
         {
             //DI kaydı. Biri senden IRepositoryManager isterse sen ona RepositoryManager dön.
@@ -23,9 +26,10 @@ namespace API.Extensions
             services.AddScoped<IRepositoryManager, RepositoryManager>();
         }
 
+        // Servis imzalarının bulunduğu interface tanımlaması
         public static void ConfigureServiceManager(this IServiceCollection services)
         {
-            //services.AddScoped<IServiceManager, ServiceManager>();
+            services.AddScoped<IServiceManager, ServiceManager>();
         }
 
 

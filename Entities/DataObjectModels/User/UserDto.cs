@@ -11,7 +11,6 @@ namespace Entities.DataObjectModels.User
     {
         public Guid UserId { get; init; }
         public string NickName { get; set; }
-        public string AccessKey { get; set; }
         public DateTime CreateDate { get; init; }
         public DateTime LastActiveDate { get; set; }
     }
