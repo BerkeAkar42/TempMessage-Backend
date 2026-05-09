@@ -16,45 +16,34 @@ namespace Services
     {
         private readonly IRepositoryManager _manager;
         private readonly IMapper _mapper;
+        private readonly IAuthenticationService _authenticationService;
 
-        public UserManager(IRepositoryManager manager, IMapper mapper)
+        public UserManager(IRepositoryManager manager, IMapper mapper, IAuthenticationService authenticationService)
         {
             _manager = manager;
             _mapper = mapper;
+            _authenticationService = authenticationService;
         }
 
+        //Bir kullanıcı oluşturur
         public async Task<UserAuthDto> CreateOneUserAsync(UserDtoForInsertion user)
         {
+            //Her halükarda bir oda sonucunda hesap oluşturulacağı kanaatine vardık. Bu yüzden user --> CreateOneUserAsync(UserDtoForInsertion user, int expireMinutes) olacak şekilde ayarlanmalı.
+            //Bu metot LobbyUsers logic'inde kullanıcı eklenirken çağırılacak.
+
             var newUser = _mapper.Map<User>(user);
 
-            //Token üretmemiz gerek.
-
-            _manager.User.CreateOneUser(newUser);
-            await _manager.SaveAsync();
-            return _mapper.Map<UserAuthDto>(newUser);
-
-
-
-            /*
-            // 1. Mapping: DTO'dan Entity'ye (Hatırla: Constructor'da AccessKey ve UserId zaten oluşuyor!)
-            var newUser = _mapper.Map<User>(userDto);
-
-            // 2. Kullanıcıyı veritabanına ekle ve kaydet
             _manager.User.CreateOneUser(newUser);
             await _manager.SaveAsync();
 
-            // 3. Token Üretimi (AuthenticationService üzerinden)
-            // Burada odaların süresine göre bir expire date hesaplayacağız
-            var token = _authService.GenerateJwtToken(newUser);
+            //Token üretme
+            var token = _authenticationService.GenerateToken(newUser); //Kullanıcının katıldığı lobby'nin süresi şu an belli olmadığından appsetting.json daki süre baz alındı.
 
-            // 4. Paketleme: Entity -> UserAuthDto
-            var authDto = _mapper.Map<UserAuthDto>(newUser);
+            var userAuthDto = _mapper.Map<UserAuthDto>(newUser);
 
-            // 5. Token'ı pakete ekliyoruz (Frontend LocalStorage'a atsın diye)
-            authDto.Token = token;
+            userAuthDto.Token = token;
 
-            return authDto;
-            */
+            return userAuthDto;
         }
 
         //Bir kullanıcı siler.
@@ -73,7 +62,7 @@ namespace Services
         //Tüm kullanıcıları getirir
         public async Task<IEnumerable<UserDto>> GetAllUsersAsync(bool trackChanges)
         {
-            var users = _manager.User.GetAllUsersAsync(trackChanges);
+            var users = await _manager.User.GetAllUsersAsync(trackChanges);
             return _mapper.Map<IEnumerable<UserDto>>(users);
         }
 

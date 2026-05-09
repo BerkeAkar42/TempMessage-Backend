@@ -12,5 +12,6 @@ namespace Services.Contracts
         IMessageLobbyService MessageLobbyService { get; }
         IMessageService MessageService { get; }
         IUserService UserService { get; }
+        IAuthenticationService AuthenticationService { get; }
     }
 }

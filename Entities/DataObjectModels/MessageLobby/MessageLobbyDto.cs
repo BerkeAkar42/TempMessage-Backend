@@ -10,7 +10,7 @@ namespace Entities.DataObjectModels.MessageLobby
     public record MessageLobbyDto
     {
         public Guid MessageLobbyId { get; init; }
-        public string Name { get; set; }
+        public string? Name { get; set; }
         public DateTime CreateDate { get; init; }
         public int ValidityPeriod { get; set; }
         public bool IsActive { get; set; }

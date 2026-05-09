@@ -12,7 +12,7 @@ namespace Entities.DataObjectModels.User
         /// <example>dacb87b8-e262-4918-825d-5e9c4b204632</example>
         public Guid UserId { get; init; }
         /// <example>BerkeAkar</example>
-        public string NickName { get; set; }
+        public string? NickName { get; set; }
         /// <example>8.05.2026 23:25:28</example>
         public DateTime CreateDate { get; init; }
         /// <example>8.05.2026 23:25:28</example>

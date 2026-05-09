@@ -51,6 +51,8 @@ namespace API
 
             //Servis kayýtlarý
             //---------------------------------------------------------------//
+            builder.Services.ConfigureJWTService(builder.Configuration); //JWT Token Configure
+            builder.Services.ConfigureSwagger(); //Swagger Auth Config
             builder.Services.ConfigureSqlContext(builder.Configuration); //SQL Connection String
             builder.Services.ConfigureRepositoryManager(); //Repository Manager
             builder.Services.ConfigureServiceManager(); //Service Manager
@@ -74,7 +76,8 @@ namespace API
 
             app.UseHttpsRedirection();
 
-            app.UseAuthorization();
+            app.UseAuthentication(); //"Sen kimsin?"
+            app.UseAuthorization(); //"Buraya girmeye yetkin var mý?"
 
             //Cors iþlemine izin verdik.
             app.UseCors("AllowLocalHost");

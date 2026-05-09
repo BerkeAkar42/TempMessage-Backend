@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.Extensions.Configuration;
 using Repositories.Contracts;
 using Services.Contracts;
 using System;
@@ -15,18 +16,21 @@ namespace Services
         private readonly Lazy<IMessageLobbyService> _messageLobbyService;
         private readonly Lazy<IMessageService> _messageService;
         private readonly Lazy<IUserService> _userService;
+        private readonly Lazy<IAuthenticationService> _authenticationService;
 
-        public ServiceManager(IRepositoryManager repositoryManager, IMapper mapper)
+        public ServiceManager(IRepositoryManager repositoryManager, IMapper mapper, IConfiguration configuration)
         {
             _lobbyUsersService = new Lazy<ILobbyUsersService>(() => new LobbyUsersManager(repositoryManager, mapper));
             _messageLobbyService = new Lazy<IMessageLobbyService>(() => new MessageLobbyManager(repositoryManager, mapper));
             _messageService = new Lazy<IMessageService>(() => new MessageManager(repositoryManager, mapper));
-            _userService = new Lazy<IUserService>(() => new UserManager(repositoryManager, mapper));
+            _authenticationService = new Lazy<IAuthenticationService>(() => new AuthenticationManager(configuration));
+            _userService = new Lazy<IUserService>(() => new UserManager(repositoryManager, mapper, AuthenticationService));
         }
 
         public ILobbyUsersService LobbyUsersService => _lobbyUsersService.Value;
         public IMessageLobbyService MessageLobbyService => _messageLobbyService.Value;
         public IMessageService MessageService => _messageService.Value;
         public IUserService UserService => _userService.Value;
+        public IAuthenticationService AuthenticationService => _authenticationService.Value;
     }
 }

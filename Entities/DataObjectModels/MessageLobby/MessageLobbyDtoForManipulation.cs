@@ -14,7 +14,7 @@ namespace Entities.DataObjectModels.MessageLobby
         [Required(ErrorMessage = "Name is a required field.")]
         [MinLength(3, ErrorMessage = "Name must consist of at least 3 characters")]
         [MaxLength(100, ErrorMessage = "Name must consist of at maximum 100 characters")]
-        public string Name { get; set; }
+        public string? Name { get; set; }
 
         [Required(ErrorMessage = "ValidityPeriod is a required field")]
         //[Range(1, 168, ErrorMessage = "Lobi süresi 1 ile 168 saat (1 hafta) arasında olmalıdır.")] Belirlenmedi!
