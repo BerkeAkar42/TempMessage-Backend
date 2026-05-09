@@ -10,6 +10,6 @@ namespace Entities.DataObjectModels.Message
     public abstract record MessageDtoForManipulation
     {
         [Required(ErrorMessage = "Message content is a required field.")]
-        public string Content { get; set; }
+        public string? Content { get; set; }
     }
 }

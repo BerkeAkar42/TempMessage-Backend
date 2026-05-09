@@ -12,6 +12,6 @@ namespace Entities.DataObjectModels.User
         [Required(ErrorMessage = "NickName is a required field.")]
         [MinLength(3, ErrorMessage = "NickName must consist of at least 3 characters")]
         [MaxLength(50, ErrorMessage = "NickName must consist of at maximum 50 characters")]
-        public string NickName { get; set; }
+        public string? NickName { get; set; }
     }
 }

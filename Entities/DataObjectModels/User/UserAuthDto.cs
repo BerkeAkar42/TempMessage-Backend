@@ -8,9 +8,14 @@ namespace Entities.DataObjectModels.User
 {
     public record UserAuthDto
     {
+        /// <example>dacb87b8-e262-4918-825d-5e9c4b204632</example>
         public Guid UserId { get; init; }
-        public string NickName { get; set; }
-        public string AccessKey { get; set; }
+        /// <example>BerkeAkar</example>
+        public string? NickName { get; set; }
+        /// <example>e02aa315a43641b992f45c3abb19d2ae</example>
+        public string? AccessKey { get; set; }
+        /// <example></example>
+        public string? Token { get; set; }
 
         /*
          UserId: "Ben kimim?"
