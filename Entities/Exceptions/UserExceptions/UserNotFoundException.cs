@@ -8,7 +8,7 @@ namespace Entities.Exceptions.UserExceptions
 {
     public sealed class UserNotFoundException : NotFoundException
     {   // 404
-        public UserNotFoundException(Guid id) : base($"The user with id: {id} cloud not found.")
+        public UserNotFoundException(Guid id) : base($"The user with id: {id} could not be found.")
         {
             
         }

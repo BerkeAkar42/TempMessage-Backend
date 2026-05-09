@@ -22,18 +22,19 @@ namespace API.Utilities.AutoMapper
 
             CreateMap<User, UserDto>(); //GET
             CreateMap<User, UserAuthDto>(); //Doğrulama İşlemleri
-            CreateMap<UserDtoForInsertion, User>(); // POST
+            CreateMap<UserDtoForInsertion, User>(); //POST
+            CreateMap<UserDtoForUpdate, User>().ReverseMap(); //PUT
 
 
             CreateMap<Message, MessageDto>()
                 .ForMember(dest => dest.NickName, opt => opt.MapFrom(src => src.User.NickName)); //GET
-            CreateMap<MessageDtoForUpdate, Message>(); //PUT
+            CreateMap<MessageDtoForUpdate, Message>().ReverseMap(); //PUT
             CreateMap<MessageDtoForInsertion, Message>(); //POST
 
 
             CreateMap<MessageLobby, MessageLobbyDto>(); //GET
             CreateMap<MessageLobbyDtoForInsertion, MessageLobby>(); //POST
-            CreateMap<MessageLobbyDtoForUpdate, MessageLobby>(); //PUT
+            CreateMap<MessageLobbyDtoForUpdate, MessageLobby>().ReverseMap(); //PUT
 
 
             CreateMap<LobbyUsers, LobbyUsersDto>()

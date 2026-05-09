@@ -8,7 +8,7 @@ namespace Entities.Exceptions.MessageExceptions
 {
     public sealed class MessageNotFoundException : NotFoundException
     {   // 404
-        public MessageNotFoundException(Guid id) : base($"The message with id: {id} cloud not found.")
+        public MessageNotFoundException(Guid id) : base($"The message with id: {id} could not found.")
         {
             
         }

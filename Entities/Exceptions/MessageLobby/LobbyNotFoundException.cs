@@ -8,7 +8,7 @@ namespace Entities.Exceptions.MessageLobby
 {
     public sealed class LobbyNotFoundException : NotFoundException
     {   //404
-        public LobbyNotFoundException(Guid id) : base($"The lobby with id: {id} cloud not found.")
+        public LobbyNotFoundException(Guid id) : base($"The lobby with id: {id} could not found.")
         {
             
         }
