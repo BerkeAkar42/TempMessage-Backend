@@ -27,7 +27,7 @@ namespace API.Extensions
                             _ => StatusCodes.Status500InternalServerError //Case
                         };
 
-                        logger.LogError($"Something went wrong: {contextFeature.Error}");
+                        logger.LogError($"Something went wrong: {contextFeature.Error.Message}"); //Fix: .Message eklendi.
 
                         await context.Response.WriteAsync(new ErrorDetails()
                         {
