@@ -13,11 +13,13 @@ namespace Services
     {
         private readonly IRepositoryManager _manager;
         private readonly IMapper _mapper;
+        private readonly ILoggerService _logger;
 
-        public MessageLobbyManager(IRepositoryManager manager, IMapper mapper)
+        public MessageLobbyManager(IRepositoryManager manager, IMapper mapper, ILoggerService logger)
         {
             _manager = manager;
             _mapper = mapper;
+            _logger = logger;
         }
     }
 }

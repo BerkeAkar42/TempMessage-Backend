@@ -18,13 +18,13 @@ namespace Services
         private readonly Lazy<IUserService> _userService;
         private readonly Lazy<IAuthenticationService> _authenticationService;
 
-        public ServiceManager(IRepositoryManager repositoryManager, IMapper mapper, IConfiguration configuration)
+        public ServiceManager(IRepositoryManager repositoryManager, IMapper mapper, IConfiguration configuration, ILoggerService logger)
         {
-            _lobbyUsersService = new Lazy<ILobbyUsersService>(() => new LobbyUsersManager(repositoryManager, mapper));
-            _messageLobbyService = new Lazy<IMessageLobbyService>(() => new MessageLobbyManager(repositoryManager, mapper));
-            _messageService = new Lazy<IMessageService>(() => new MessageManager(repositoryManager, mapper));
+            _lobbyUsersService = new Lazy<ILobbyUsersService>(() => new LobbyUsersManager(repositoryManager, mapper, logger));
+            _messageLobbyService = new Lazy<IMessageLobbyService>(() => new MessageLobbyManager(repositoryManager, mapper, logger));
+            _messageService = new Lazy<IMessageService>(() => new MessageManager(repositoryManager, mapper, logger));
             _authenticationService = new Lazy<IAuthenticationService>(() => new AuthenticationManager(configuration));
-            _userService = new Lazy<IUserService>(() => new UserManager(repositoryManager, mapper, AuthenticationService));
+            _userService = new Lazy<IUserService>(() => new UserManager(repositoryManager, mapper, AuthenticationService, logger));
         }
 
         public ILobbyUsersService LobbyUsersService => _lobbyUsersService.Value;

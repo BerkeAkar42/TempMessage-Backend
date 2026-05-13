@@ -17,12 +17,14 @@ namespace Services
         private readonly IRepositoryManager _manager;
         private readonly IMapper _mapper;
         private readonly IAuthenticationService _authenticationService;
+        private readonly ILoggerService _logger;
 
-        public UserManager(IRepositoryManager manager, IMapper mapper, IAuthenticationService authenticationService)
+        public UserManager(IRepositoryManager manager, IMapper mapper, IAuthenticationService authenticationService, ILoggerService logger)
         {
             _manager = manager;
             _mapper = mapper;
             _authenticationService = authenticationService;
+            _logger = logger;
         }
 
         //Bir kullanıcı oluşturur
