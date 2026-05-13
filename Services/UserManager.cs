@@ -38,6 +38,7 @@ namespace Services
             _manager.User.CreateOneUser(newUser);
             await _manager.SaveAsync();
 
+
             //Token üretme
             var token = _authenticationService.GenerateToken(newUser); //Kullanıcının katıldığı lobby'nin süresi şu an belli olmadığından appsetting.json daki süre baz alındı.
 
