@@ -1,4 +1,4 @@
-﻿using Entities.DataObjectModels.User;
+﻿using Entities.Dtos.User;
 using System;
 using System.Collections.Generic;
 using System.Linq;

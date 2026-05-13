@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Entities.DataObjectModels.Message
+namespace Entities.Dtos.Message
 {   //Güncelleme için kullanılacak olan DTO
     public record MessageDtoForUpdate : MessageDtoForManipulation
     {

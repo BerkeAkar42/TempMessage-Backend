@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using Entities.DataObjectModels.User;
+using Entities.Dtos.User;
 using Entities.Exceptions.UserExceptions;
 using Entities.Models;
 using Repositories.Contracts;

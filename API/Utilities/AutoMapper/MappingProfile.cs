@@ -1,8 +1,8 @@
 ﻿using AutoMapper;
-using Entities.DataObjectModels.LobbyUsers;
-using Entities.DataObjectModels.Message;
-using Entities.DataObjectModels.MessageLobby;
-using Entities.DataObjectModels.User;
+using Entities.Dtos.LobbyUsers;
+using Entities.Dtos.Message;
+using Entities.Dtos.MessageLobby;
+using Entities.Dtos.User;
 using Entities.Models;
 
 namespace API.Utilities.AutoMapper

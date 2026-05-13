@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Entities.DataObjectModels.MessageLobby
+namespace Entities.Dtos.MessageLobby
 {
     //Validation işlemlerinin tanımlandığı DTO
     //Bu sınıf new edilemez. Sadece validasyon kurallarını (zorunluluk, uzunluk vb.) tek bir merkezde toplar.

@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Entities.DataObjectModels.User
+namespace Entities.Dtos.User
 {
     public abstract record UserDtoForManipulation
     {

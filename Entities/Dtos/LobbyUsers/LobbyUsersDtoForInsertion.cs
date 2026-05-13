@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Entities.DataObjectModels.LobbyUsers
+namespace Entities.Dtos.LobbyUsers
 {
     public record LobbyUsersDtoForInsertion : LobbyUsersDtoForManipulation
     {

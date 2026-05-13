@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Entities.DataObjectModels.MessageLobby
+namespace Entities.Dtos.MessageLobby
 {   //Create işlemlerinde kullanılacak olan DTO
     public record MessageLobbyDtoForInsertion : MessageLobbyDtoForManipulation
     {

@@ -1,4 +1,4 @@
-﻿using Entities.DataObjectModels.User;
+﻿using Entities.Dtos.User;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;

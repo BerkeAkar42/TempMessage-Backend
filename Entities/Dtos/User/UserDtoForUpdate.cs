@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace Entities.DataObjectModels.User
+namespace Entities.Dtos.User
 {
     public record UserDtoForUpdate : UserDtoForManipulation
     {

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Entities.DataObjectModels.MessageLobby
+namespace Entities.Dtos.MessageLobby
 {   //GET işlemleri için kullanolacak olan DTO
     // API'den veri dönerken validasyona gerek yok. Sadece istemciye (Frontend) hangi verileri göstermek isteniyorsa onları koyarız.
     public record MessageLobbyDto
