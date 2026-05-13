@@ -38,6 +38,7 @@ namespace Services
             _manager.User.CreateOneUser(newUser);
             await _manager.SaveAsync();
 
+            _logger.LogInfo($"User Registration Successful | ID: {newUser.UserId} | Nickname: {newUser.NickName}");
 
             //Token üretme
             var token = _authenticationService.GenerateToken(newUser); //Kullanıcının katıldığı lobby'nin süresi şu an belli olmadığından appsetting.json daki süre baz alındı.
@@ -60,6 +61,7 @@ namespace Services
             _manager.User.DeleteOneUser(user);
 
             await _manager.SaveAsync();
+            _logger.LogInfo($"User Deleted | ID: {user.UserId}");
         }
 
         //Tüm kullanıcıları getirir
@@ -92,6 +94,7 @@ namespace Services
             _manager.User.UpdateOneUser(currentUser);
 
             await _manager.SaveAsync(); //Değişiklikleri db'ye kaydet.
+            _logger.LogInfo($"User Updated | ID: {currentUser.UserId}");
         }
     }
 }
