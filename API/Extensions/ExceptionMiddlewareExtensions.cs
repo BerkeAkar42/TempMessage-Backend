@@ -9,7 +9,7 @@ namespace API.Extensions
     {
         public static void ConfigureExceptionHandler(this WebApplication app, ILoggerService logger) //Extension method (genişletme metodu) yazmak için sınıfın ve metodun statik olması gerekir.
         {
-            //Bu ifade sayesinde bu metot, Program.cs içinde sanki app nesnesinin kendi metoduymuş gibi (app.ConfigureExceptionHandler(...)) çağrılabilecek.
+            //Bu ifade sayesinde bu metot, Program.cs içinde sanki app nesnesinin kendi metoduymuş gibi (app.ConfigureExceptionHandler(...)) çağrılabilecek
 
             app.UseExceptionHandler(appError =>
             {
@@ -17,17 +17,26 @@ namespace API.Extensions
                 {
                     context.Response.ContentType = "application/json";
                     var contextFeature = context.Features.Get<IExceptionHandlerFeature>();
+
                     if (contextFeature is not null)
                     {
-                        context.Response.StatusCode = contextFeature.Error switch //Burada Switch Case yapısı kullanıldı
+                        // Hatanın tipine göre seviye ve status code belirliyoruz
+                        var (statusCode, logLevel) = contextFeature.Error switch //Burada Switch Case yapısı kullanıldı
                         {
-                            NotFoundException => StatusCodes.Status404NotFound, //Case
-                            BadRequestException => StatusCodes.Status400BadRequest, //Case
-                            UnauthorizedException => StatusCodes.Status401Unauthorized, //Case
-                            _ => StatusCodes.Status500InternalServerError //Case
+                            NotFoundException => (StatusCodes.Status404NotFound, "Warn"), //Case
+                            BadRequestException => (StatusCodes.Status400BadRequest, "Warn"), //Case
+                            _ => (StatusCodes.Status500InternalServerError, "Error") //Case
                         };
 
-                        logger.LogError($"Something went wrong: {contextFeature.Error.Message}"); //Fix: .Message eklendi.
+                        context.Response.StatusCode = statusCode;
+
+                        // LOGLAMA: Başına [EXCEPTION] etiketi koyuyoruz ki aksiyonlardan ayrılsın
+                        string logMsg = $"Path: {context.Request.Path} | Message: {contextFeature.Error.Message}";  //Fix: .Message eklendi.
+
+                        if (logLevel == "Error")
+                            logger.LogError(logMsg);
+                        else
+                            logger.LogWarn(logMsg);
 
                         await context.Response.WriteAsync(new ErrorDetails()
                         {
@@ -35,9 +44,16 @@ namespace API.Extensions
                             Message = contextFeature.Error.Message
                         }.ToString());
                     }
-
                 });
             });
+
+            // --- Loglamalar bu şekilde oluşturulmalıdır!!! ---
+            // AKSİYON LOGU: Başına [ACTION] koyuyoruz
+            //_logger.LogInfo($"UserID: {userId} - Action: {action}");
+            //_logger.LogInfo($"Token Generated - User: {newUser.NickName}");
+            //_logger.LogInfo($"User Deleted - ID: {id}");
+
+
 
             //UseExceptionHandler: ASP.NET Core'un içinde hazır gelen, "bir hata olduğunda buraya gir" diyen komuttur.
             //context.Response.StatusCode: Hata olduğunda kullanıcıya varsayılan olarak 500 (Internal Server Error) döneceğimizi belirtiyoruz.

@@ -35,5 +35,12 @@ namespace API.Controllers
             // Eğer buraya erişebiliyorsan Token geçerlidir.
             return Ok("Tebrikler Berke! Pasaportun (Token) geçerli, gizli bölgeye girdin.");
         }
+
+        [Authorize]
+        [HttpDelete]
+        public IActionResult DeleteOneUser()
+        {
+            return Ok("Tamamdır");
+        }
     }
 }
