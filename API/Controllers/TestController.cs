@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Services.Common;
+using System.Threading.Tasks;
 
 namespace API.Controllers
 {
@@ -30,17 +31,32 @@ namespace API.Controllers
 
         [Authorize]
         [HttpGet]
-        public IActionResult GetSecretData()
+        public async Task<IActionResult> GetAllUsers()
         {
-            // Eğer buraya erişebiliyorsan Token geçerlidir.
-            return Ok("Tebrikler Berke! Pasaportun (Token) geçerli, gizli bölgeye girdin.");
+            var users = await _service.UserService.GetAllUsersAsync(false);
+            return Ok(users);
         }
 
         [Authorize]
-        [HttpDelete]
-        public IActionResult DeleteOneUser()
+        [HttpDelete("{id:guid}")]
+        public async Task<IActionResult> DeleteOneUser([FromRoute(Name ="id")] Guid id)
         {
-            return Ok("Tamamdır");
+            if(id == Guid.Empty)
+                return BadRequest();
+
+            await _service.UserService.DeleteOneUserAsync(id, true);
+            return NoContent();
+        }
+
+
+        [HttpPut]
+        public async Task<IActionResult> UpdateOneUser(UserDtoForUpdate newUser)
+        {
+            if (newUser is null)
+                return BadRequest();
+
+            await _service.UserService.UpdateOneUserAsync(newUser.UserId, newUser, true);
+            return NoContent();
         }
     }
 }

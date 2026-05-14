@@ -25,7 +25,7 @@ namespace Repositories.EFCore.Features.Users
         public async Task<IEnumerable<User>> GetAllUsersAsync(bool trackChanges)
         {
             //var users = await FindAll(trackChanges).Where(u => u.IsActive == true).ToListAsync(); //Örnek: Aktif olan hesapları dön
-            var users = await FindAll(trackChanges).ToListAsync();
+            var users = await FindAll(trackChanges).OrderByDescending(u => u.CreateDate).ToListAsync(); //En büyükten en küçüğe sıralar.
             return users;
         }
 
