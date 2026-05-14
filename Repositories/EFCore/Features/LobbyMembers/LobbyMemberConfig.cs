@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Repositories.EFCore.Config
+namespace Repositories.EFCore.Features.LobbyMembers
 {
     public class LobbyMemberConfig : IEntityTypeConfiguration<LobbyMember>
     {

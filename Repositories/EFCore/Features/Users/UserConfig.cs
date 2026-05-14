@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Repositories.EFCore.Config
+namespace Repositories.EFCore.Features.Users
 {
     public class UserConfig : IEntityTypeConfiguration<User>
     {

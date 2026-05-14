@@ -1,6 +1,9 @@
 ﻿using Entities.Models;
 using Microsoft.EntityFrameworkCore;
-using Repositories.EFCore.Config;
+using Repositories.EFCore.Features.Lobbies;
+using Repositories.EFCore.Features.LobbyMembers;
+using Repositories.EFCore.Features.Messages;
+using Repositories.EFCore.Features.Users;
 using System;
 using System.Collections.Generic;
 using System.Linq;
