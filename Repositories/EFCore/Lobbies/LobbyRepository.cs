@@ -1,6 +1,6 @@
 ﻿using Entities.Models;
 using Microsoft.EntityFrameworkCore;
-using Repositories.Contracts;
+using Repositories.Context;
 using System.Linq.Expressions;
 
 namespace Repositories.EFCore.Lobbies

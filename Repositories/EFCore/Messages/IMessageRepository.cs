@@ -1,5 +1,5 @@
 ﻿using Entities.Models;
-using Repositories.Contracts;
+using Repositories.Context;
 
 namespace Repositories.EFCore.Messages
 {

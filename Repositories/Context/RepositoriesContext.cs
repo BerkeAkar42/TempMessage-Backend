@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Repositories.Contracts
+namespace Repositories.Context
 {
     public class RepositoriesContext : DbContext
     {

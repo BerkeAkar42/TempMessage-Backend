@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using Repositories.Contracts;
+using Repositories.Context;
 using Services.Contracts;
 using System;
 using System.Collections.Generic;

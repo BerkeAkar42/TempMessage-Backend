@@ -2,7 +2,7 @@
 using Entities.Dtos.User;
 using Entities.Exceptions.UserExceptions;
 using Entities.Models;
-using Repositories.Contracts;
+using Repositories.Context;
 using Services.Contracts;
 using System;
 using System.Collections.Generic;

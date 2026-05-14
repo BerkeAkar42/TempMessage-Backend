@@ -1,6 +1,6 @@
 ﻿using Entities.Models;
 using Microsoft.EntityFrameworkCore;
-using Repositories.Contracts;
+using Repositories.Context;
 using System;
 using System.Collections;
 using System.Collections.Generic;
