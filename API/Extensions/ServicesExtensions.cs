@@ -4,10 +4,8 @@ using Microsoft.AspNetCore.Mvc.Formatters;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
-using Repositories.Contracts;
-using Repositories.EFCore;
-using Services;
-using Services.Contracts;
+using Repositories.Context;
+using Services.Common;
 using System.Reflection;
 using System.Text;
 
