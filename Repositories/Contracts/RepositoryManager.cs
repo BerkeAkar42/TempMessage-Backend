@@ -1,11 +1,14 @@
-﻿using Repositories.Contracts;
+﻿using Repositories.EFCore.Lobbies;
+using Repositories.EFCore.LobbyMembers;
+using Repositories.EFCore.Messages;
+using Repositories.EFCore.Users;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Repositories.EFCore
+namespace Repositories.Contracts
 {
     //Tek tek her yerde DI yapmak yerine bunları tek bir yere yazıp her yerde erişebileceğim bir yapıya çevirdim.
     public class RepositoryManager : IRepositoryManager

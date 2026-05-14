@@ -9,7 +9,7 @@ using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Repositories.EFCore
+namespace Repositories.EFCore.Users
 {
     public class UserRepository : RepositoryBase<User>, IUserRepository
     {

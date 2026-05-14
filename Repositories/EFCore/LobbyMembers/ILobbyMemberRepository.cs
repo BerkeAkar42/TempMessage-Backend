@@ -1,6 +1,7 @@
 ﻿using Entities.Models;
+using Repositories.Contracts;
 
-namespace Repositories.Contracts
+namespace Repositories.EFCore.LobbyMembers
 {
     public interface ILobbyMemberRepository : IRepositoriesBase<LobbyMember>
     {

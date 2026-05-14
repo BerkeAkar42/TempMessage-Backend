@@ -1,5 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Repositories.Contracts;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,7 +6,7 @@ using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Repositories.EFCore
+namespace Repositories.Contracts
 {
     //bool trackChanges => Üzerinde değişiklik yapacaksan, efcore bunun takibini yapması için true demelisin. Ama eğer sadece veri listeleteceksen bunu takip etme diyebilirsin.
     public class RepositoryBase<T> : IRepositoriesBase<T> where T : class
