@@ -1,7 +1,7 @@
 ﻿using Entities.Models;
 using Repositories.Context;
 
-namespace Repositories.EFCore.LobbyMembers
+namespace Repositories.EFCore.Features.LobbyMembers
 {
     public interface ILobbyMemberRepository : IRepositoriesBase<LobbyMember>
     {

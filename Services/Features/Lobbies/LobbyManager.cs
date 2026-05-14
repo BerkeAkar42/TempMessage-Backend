@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Services.Lobbies
+namespace Services.Features.Lobbies
 {
     public class LobbyManager : ILobbyService
     {

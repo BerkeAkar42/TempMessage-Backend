@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Services.Messages
+namespace Services.Features.Messages
 {
     public class MessageManager : IMessageService
     {

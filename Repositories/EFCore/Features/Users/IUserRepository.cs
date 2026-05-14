@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Repositories.EFCore.Users
+namespace Repositories.EFCore.Features.Users
 {
     public interface IUserRepository : IRepositoriesBase<User>
     {

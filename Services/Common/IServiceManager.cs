@@ -1,8 +1,8 @@
-﻿using Services.Authentication;
-using Services.Lobbies;
-using Services.LobbyMembers;
-using Services.Messages;
-using Services.Users;
+﻿using Services.Features.Authentication;
+using Services.Features.Lobbies;
+using Services.Features.LobbyMembers;
+using Services.Features.Messages;
+using Services.Features.Users;
 using System;
 using System.Collections.Generic;
 using System.Linq;

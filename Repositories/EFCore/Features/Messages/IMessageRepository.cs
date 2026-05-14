@@ -1,7 +1,7 @@
 ﻿using Entities.Models;
 using Repositories.Context;
 
-namespace Repositories.EFCore.Messages
+namespace Repositories.EFCore.Features.Messages
 {
     public interface IMessageRepository : IRepositoriesBase<Message>
     {

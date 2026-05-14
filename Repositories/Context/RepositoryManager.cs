@@ -1,7 +1,7 @@
-﻿using Repositories.EFCore.Lobbies;
-using Repositories.EFCore.LobbyMembers;
-using Repositories.EFCore.Messages;
-using Repositories.EFCore.Users;
+﻿using Repositories.EFCore.Features.Lobbies;
+using Repositories.EFCore.Features.LobbyMembers;
+using Repositories.EFCore.Features.Messages;
+using Repositories.EFCore.Features.Users;
 using System;
 using System.Collections.Generic;
 using System.Linq;

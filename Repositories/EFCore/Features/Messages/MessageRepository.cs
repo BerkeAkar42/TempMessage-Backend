@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using Repositories.Context;
 using System.Linq.Expressions;
 
-namespace Repositories.EFCore.Messages
+namespace Repositories.EFCore.Features.Messages
 {
     public class MessageRepository : RepositoryBase<Message> , IMessageRepository
     {

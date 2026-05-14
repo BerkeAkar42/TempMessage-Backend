@@ -9,7 +9,7 @@ using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Services.Authentication
+namespace Services.Features.Authentication
 {
     public class AuthenticationManager : IAuthenticationService
     {

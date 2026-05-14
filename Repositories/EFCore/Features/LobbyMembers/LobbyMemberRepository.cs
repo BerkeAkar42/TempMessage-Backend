@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using Repositories.Context;
 using System.Linq.Expressions;
 
-namespace Repositories.EFCore.LobbyMembers
+namespace Repositories.EFCore.Features.LobbyMembers
 {
     public class LobbyMemberRepository : RepositoryBase<LobbyMember> , ILobbyMemberRepository
     {

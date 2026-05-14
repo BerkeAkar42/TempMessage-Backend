@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Services.Lobbies
+namespace Services.Features.LobbyMembers
 {
-    public interface ILobbyService
+    public interface ILobbyMemberService
     {
     }
 }
