@@ -1,10 +1,15 @@
-﻿using System;
+﻿using Services.Authentication;
+using Services.Lobbies;
+using Services.LobbyMembers;
+using Services.Messages;
+using Services.Users;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Services.Contracts
+namespace Services.Common
 {
     public interface IServiceManager
     {

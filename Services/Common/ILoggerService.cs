@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Services.Contracts
+namespace Services.Common
 {   //NLOG'un loglama imzaları
     public interface ILoggerService
     {

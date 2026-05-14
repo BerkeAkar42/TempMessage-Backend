@@ -5,8 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using Repositories.Context;
-using Services;
-using Services.Contracts;
+using Services.Common;
 using System.Reflection;
 using System.Text;
 

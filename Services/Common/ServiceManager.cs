@@ -1,14 +1,18 @@
 ﻿using AutoMapper;
 using Microsoft.Extensions.Configuration;
 using Repositories.Context;
-using Services.Contracts;
+using Services.Authentication;
+using Services.Lobbies;
+using Services.LobbyMembers;
+using Services.Messages;
+using Services.Users;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Services
+namespace Services.Common
 {   //Tek tek her yerde DI yapmak yerine bunları tek bir yere yazıp her yerde erişebileceğim bir yapıya çevirdim.
     public class ServiceManager : IServiceManager
     {

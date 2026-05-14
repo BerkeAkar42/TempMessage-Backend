@@ -3,14 +3,15 @@ using Entities.Dtos.User;
 using Entities.Exceptions.UserExceptions;
 using Entities.Models;
 using Repositories.Context;
-using Services.Contracts;
+using Services.Authentication;
+using Services.Common;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Services
+namespace Services.Users
 {
     public class UserManager : IUserService
     {

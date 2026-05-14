@@ -1,7 +1,7 @@
 ﻿using Entities.ErrorModel;
 using Entities.Exceptions;
 using Microsoft.AspNetCore.Diagnostics;
-using Services.Contracts;
+using Services.Common;
 
 namespace API.Extensions
 {

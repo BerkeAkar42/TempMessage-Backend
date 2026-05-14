@@ -1,12 +1,11 @@
 ﻿using NLog;
-using Services.Contracts;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Services
+namespace Services.Common
 {   //NLOG'un loglama metotları
     public class LoggerManager : ILoggerService
     {

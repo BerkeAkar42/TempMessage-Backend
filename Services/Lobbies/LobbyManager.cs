@@ -1,13 +1,13 @@
 ﻿using AutoMapper;
 using Repositories.Context;
-using Services.Contracts;
+using Services.Common;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Services
+namespace Services.Lobbies
 {
     public class LobbyManager : ILobbyService
     {

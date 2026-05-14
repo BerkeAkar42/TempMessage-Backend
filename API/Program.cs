@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using NLog;
 using Repositories.EFCore;
-using Services.Contracts;
+using Services.Common;
 using System.Reflection;
 
 namespace API
