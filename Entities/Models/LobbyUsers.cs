@@ -12,11 +12,11 @@ namespace Entities.Models
         public DateTime JoinedDate { get; init; }
 
         //FK tanımalamaları
-        public Guid MessageLobbyId { get; set; }
+        public Guid LobbyId { get; set; }
         public Guid UserId { get; set; }
 
         public User User { get; set; }
-        public MessageLobby MessageLobby { get; set; }
+        public Lobby Lobby { get; set; }
 
         public LobbyUsers()
         {

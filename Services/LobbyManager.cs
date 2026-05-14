@@ -9,13 +9,13 @@ using System.Threading.Tasks;
 
 namespace Services
 {
-    public class MessageLobbyManager : IMessageLobbyService
+    public class LobbyManager : ILobbyService
     {
         private readonly IRepositoryManager _manager;
         private readonly IMapper _mapper;
         private readonly ILoggerService _logger;
 
-        public MessageLobbyManager(IRepositoryManager manager, IMapper mapper, ILoggerService logger)
+        public LobbyManager(IRepositoryManager manager, IMapper mapper, ILoggerService logger)
         {
             _manager = manager;
             _mapper = mapper;

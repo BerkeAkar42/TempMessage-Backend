@@ -23,9 +23,9 @@ namespace Repositories.EFCore.Config
                 .HasForeignKey(lu => lu.UserId)
                 .OnDelete(DeleteBehavior.Cascade); // Kullanıcı silinirse bu lobi üyeliği de silinsin
 
-            builder.HasOne(lu => lu.MessageLobby)
+            builder.HasOne(lu => lu.Lobby)
                 .WithMany()
-                .HasForeignKey(lu => lu.MessageLobbyId)
+                .HasForeignKey(lu => lu.LobbyId)
                 .OnDelete(DeleteBehavior.Cascade); // Lobi silinirse tüm üyelik kayıtları uçsun
         }
     }

@@ -14,6 +14,6 @@ namespace Services.Contracts
         Task<UserAuthDto> CreateOneUserAsync(UserDtoForInsertion user); //Kullanıcı oluştuktan sonra kullanıcı bilgilerini tarayıcıya kayıt etmek üzere geri döndük. (id, NickName, AccessKey)
         Task UpdateOneUserAsync(Guid id, UserDtoForUpdate user, bool trackChanges); //--> Kullnıcıyı bulurken kullanacağımız GetOneUserById için trackChanges'i alıyoruz.
         Task DeleteOneUserAsync(Guid id, bool trackChanges);
-        //Task<string> ExtendSessionAsync(Guid userId, int extraMinutes); //Kullanıcı başka bir lobiye katıldığında token süresini yenileyen logic olacak. Bunu MessageLobby manager'ında Create metotunun içinde çağırıp token işlemleri için buraya yönlendirebiliriz.
+        //Task<string> ExtendSessionAsync(Guid userId, int extraMinutes); //Kullanıcı başka bir lobiye katıldığında token süresini yenileyen logic olacak. Bunu Lobby manager'ında Create metotunun içinde çağırıp token işlemleri için buraya yönlendirebiliriz.
     }
 }

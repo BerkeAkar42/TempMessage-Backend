@@ -14,7 +14,7 @@ namespace Repositories.EFCore
         private readonly Lazy<IUserRepository> _userRepository;
         private readonly Lazy<IMessageRepository> _messageRepository;
         private readonly Lazy<ILobbyUsersRepository> _lobbyUsersRepository;
-        private readonly Lazy<IMessageLobbyRepository> _messageLobbyRepository;
+        private readonly Lazy<ILobbyRepository> _LobbyRepository;
 
         public RepositoryManager(RepositoriesContext context)
         {
@@ -23,12 +23,12 @@ namespace Repositories.EFCore
             _userRepository = new Lazy<IUserRepository>(() => new UserRepository(_context));
             _messageRepository = new Lazy<IMessageRepository>(() => new MessageRepository(_context));
             _lobbyUsersRepository = new Lazy<ILobbyUsersRepository>(()=> new LobbyUsersRepository(_context));
-            _messageLobbyRepository = new Lazy<IMessageLobbyRepository>(()=> new MessageLobbyRepository(_context));
+            _LobbyRepository = new Lazy<ILobbyRepository>(()=> new LobbyRepository(_context));
         }
 
         public IUserRepository User => _userRepository.Value;
         public IMessageRepository Message => _messageRepository.Value;
-        public IMessageLobbyRepository MessageLobby => _messageLobbyRepository.Value;
+        public ILobbyRepository Lobby => _LobbyRepository.Value;
         public ILobbyUsersRepository LobbyUsers => _lobbyUsersRepository.Value;
         public async Task SaveAsync() => await _context.SaveChangesAsync();
         

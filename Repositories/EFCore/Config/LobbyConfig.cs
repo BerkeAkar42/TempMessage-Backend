@@ -9,11 +9,11 @@ using System.Threading.Tasks;
 
 namespace Repositories.EFCore.Config
 {
-    public class MessageLobbyConfig : IEntityTypeConfiguration<MessageLobby>
+    public class LobbyConfig : IEntityTypeConfiguration<Lobby>
     {
-        public void Configure(EntityTypeBuilder<MessageLobby> builder)
+        public void Configure(EntityTypeBuilder<Lobby> builder)
         {
-            builder.HasKey(ml => ml.MessageLobbyId); //PK
+            builder.HasKey(ml => ml.LobbyId); //PK
             builder.Property(ml => ml.Name)
                 .HasMaxLength(100)
                 .IsRequired(); // Lobi adı max 100 karakter olabilir.

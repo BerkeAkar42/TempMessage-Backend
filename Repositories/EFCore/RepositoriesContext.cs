@@ -17,7 +17,7 @@ namespace Repositories.EFCore
         }
 
         public DbSet<User> Users { get; set; } //Users Tablosu
-        public DbSet<MessageLobby> MessageLobby { get; set; } //Mesaj lobilerinin tutulduğu tablo
+        public DbSet<Lobby> Lobby { get; set; } //Mesaj lobilerinin tutulduğu tablo
         public DbSet<Message> Messages { get; set; } //Mesajların tutulduğu tablo
         public DbSet<LobbyUsers> LobbyUsers { get; set; } //Lobi kullanıcılarının tutulduğu tablo
 
@@ -27,7 +27,7 @@ namespace Repositories.EFCore
         {
             //Configurasyonları ayrı dosyalarda tuttuk.
             modelBuilder.ApplyConfiguration(new UserConfig());
-            modelBuilder.ApplyConfiguration(new MessageLobbyConfig());
+            modelBuilder.ApplyConfiguration(new LobbyConfig());
             modelBuilder.ApplyConfiguration(new MessageConfig());
             modelBuilder.ApplyConfiguration(new LobbyUsersConfig());
         }

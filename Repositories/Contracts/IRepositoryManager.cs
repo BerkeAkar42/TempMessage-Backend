@@ -10,7 +10,7 @@ namespace Repositories.Contracts
     {
         IUserRepository User { get; }
         IMessageRepository Message { get; }
-        IMessageLobbyRepository MessageLobby { get; }
+        ILobbyRepository Lobby { get; }
         ILobbyUsersRepository LobbyUsers { get; }
         Task SaveAsync();
     }

@@ -18,6 +18,6 @@ namespace Entities.Dtos.Message
         //FK tanımalamaları
         public Guid UserId { get; set; }
         public string? NickName { get; set; }
-        public Guid MessageLobbyId { get; set; }
+        public Guid LobbyId { get; set; }
     }
 }

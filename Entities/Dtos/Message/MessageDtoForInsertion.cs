@@ -12,7 +12,7 @@ namespace Entities.Dtos.Message
         [Required(ErrorMessage = "UserId is a required field.")]
         public Guid UserId { get; set; }
 
-        [Required(ErrorMessage = "MessageLobbyId is a required field.")]
-        public Guid MessageLobbyId { get; set; }
+        [Required(ErrorMessage = "LobbyId is a required field.")]
+        public Guid LobbyId { get; set; }
     }
 }

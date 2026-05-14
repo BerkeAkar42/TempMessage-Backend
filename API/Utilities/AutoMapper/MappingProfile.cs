@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using Entities.Dtos.LobbyUsers;
 using Entities.Dtos.Message;
-using Entities.Dtos.MessageLobby;
+using Entities.Dtos.Lobby;
 using Entities.Dtos.User;
 using Entities.Models;
 
@@ -32,9 +32,9 @@ namespace API.Utilities.AutoMapper
             CreateMap<MessageDtoForInsertion, Message>(); //POST
 
 
-            CreateMap<MessageLobby, MessageLobbyDto>(); //GET
-            CreateMap<MessageLobbyDtoForInsertion, MessageLobby>(); //POST
-            CreateMap<MessageLobbyDtoForUpdate, MessageLobby>().ReverseMap(); //PUT
+            CreateMap<Lobby, LobbyDto>(); //GET
+            CreateMap<LobbyDtoForInsertion, Lobby>(); //POST
+            CreateMap<LobbyDtoForUpdate, Lobby>().ReverseMap(); //PUT
 
 
             CreateMap<LobbyUsers, LobbyUsersDto>()

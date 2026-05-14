@@ -16,10 +16,10 @@ namespace Entities.Models
 
         //FK tanımalamaları
         public Guid UserId { get; set; }
-        public Guid MessageLobbyId { get; set; }
+        public Guid LobbyId { get; set; }
 
         public User User { get; set; }
-        public MessageLobby MessageLobby { get; set; }
+        public Lobby Lobby { get; set; }
 
         public Message()
         {

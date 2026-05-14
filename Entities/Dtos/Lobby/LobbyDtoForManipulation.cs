@@ -5,11 +5,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Entities.Dtos.MessageLobby
+namespace Entities.Dtos.Lobby
 {
     //Validation işlemlerinin tanımlandığı DTO
     //Bu sınıf new edilemez. Sadece validasyon kurallarını (zorunluluk, uzunluk vb.) tek bir merkezde toplar.
-    public abstract record MessageLobbyDtoForManipulation
+    public abstract record LobbyDtoForManipulation
     {
         [Required(ErrorMessage = "Name is a required field.")]
         [MinLength(3, ErrorMessage = "Name must consist of at least 3 characters")]

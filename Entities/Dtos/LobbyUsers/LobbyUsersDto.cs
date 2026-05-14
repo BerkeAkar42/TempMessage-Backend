@@ -12,6 +12,6 @@ namespace Entities.Dtos.LobbyUsers
         public DateTime JoinedDate { get; init; }
         public Guid UserId { get; set; }
         public string? NickName { get; set; }
-        public Guid MessageLobbyId { get; set; }
+        public Guid LobbyId { get; set; }
     }
 }

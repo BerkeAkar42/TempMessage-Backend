@@ -25,9 +25,9 @@ namespace Repositories.EFCore.Config
                 .HasForeignKey(m => m.UserId) //FK olarak tanımla
                 .OnDelete(DeleteBehavior.Cascade); // User silinirse mesajlarını sil
 
-            builder.HasOne(m => m.MessageLobby)
+            builder.HasOne(m => m.Lobby)
                 .WithMany()
-                .HasForeignKey(m => m.MessageLobbyId) //FK olarak tanımla
+                .HasForeignKey(m => m.LobbyId) //FK olarak tanımla
                 .OnDelete(DeleteBehavior.Cascade); // Lobi silinirse mesajları sil
         }
     }

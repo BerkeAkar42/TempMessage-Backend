@@ -9,7 +9,7 @@ namespace Services.Contracts
     public interface IServiceManager
     {
         ILobbyUsersService LobbyUsersService { get; }
-        IMessageLobbyService MessageLobbyService { get; }
+        ILobbyService LobbyService { get; }
         IMessageService MessageService { get; }
         IUserService UserService { get; }
         IAuthenticationService AuthenticationService { get; }

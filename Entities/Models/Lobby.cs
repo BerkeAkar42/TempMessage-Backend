@@ -6,17 +6,17 @@ using System.Threading.Tasks;
 
 namespace Entities.Models
 {
-    public class MessageLobby
+    public class Lobby
     {
-        public Guid MessageLobbyId { get; init; }
+        public Guid LobbyId { get; init; }
         public string Name { get; set; }
         public DateTime CreateDate { get; init; }
         public int ValidityPeriod { get; set; }
         public bool IsActive { get; set; }
 
-        public MessageLobby()
+        public Lobby()
         {
-            MessageLobbyId = Guid.NewGuid();
+            LobbyId = Guid.NewGuid();
             CreateDate = DateTime.Now;
         }
     }
