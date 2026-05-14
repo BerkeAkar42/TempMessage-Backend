@@ -9,11 +9,11 @@ using System.Threading.Tasks;
 
 namespace Repositories.EFCore.Config
 {
-    public class LobbyUsersConfig : IEntityTypeConfiguration<LobbyUsers>
+    public class LobbyMemberConfig : IEntityTypeConfiguration<LobbyMember>
     {
-        public void Configure(EntityTypeBuilder<LobbyUsers> builder)
+        public void Configure(EntityTypeBuilder<LobbyMember> builder)
         {
-            builder.HasKey(lu => lu.LobbyUsersId); //PK
+            builder.HasKey(lu => lu.LobbyMemberId); //PK
             builder.Property(u => u.JoinedDate)
                 .IsRequired(); //Boş olamaz.
 

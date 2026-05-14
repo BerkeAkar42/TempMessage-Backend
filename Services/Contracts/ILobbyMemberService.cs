@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Services.Contracts
 {
-    public interface ILobbyUsersService
+    public interface ILobbyMemberService
     {
     }
 }

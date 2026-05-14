@@ -5,9 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Entities.Dtos.LobbyUsers
+namespace Entities.Dtos.LobbyMember
 {
-    public abstract record LobbyUsersDtoForManipulation
+    public abstract record LobbyMemberDtoForManipulation
     {
         [Required(ErrorMessage = "LobbyId is a required field.")]
         public Guid LobbyId { get; set; }

@@ -12,7 +12,7 @@ namespace Services
 {   //Tek tek her yerde DI yapmak yerine bunları tek bir yere yazıp her yerde erişebileceğim bir yapıya çevirdim.
     public class ServiceManager : IServiceManager
     {
-        private readonly Lazy<ILobbyUsersService> _lobbyUsersService;
+        private readonly Lazy<ILobbyMemberService> _lobbyMemberService;
         private readonly Lazy<ILobbyService> _LobbyService;
         private readonly Lazy<IMessageService> _messageService;
         private readonly Lazy<IUserService> _userService;
@@ -20,14 +20,14 @@ namespace Services
 
         public ServiceManager(IRepositoryManager repositoryManager, IMapper mapper, IConfiguration configuration, ILoggerService logger)
         {
-            _lobbyUsersService = new Lazy<ILobbyUsersService>(() => new LobbyUsersManager(repositoryManager, mapper, logger));
+            _lobbyMemberService = new Lazy<ILobbyMemberService>(() => new LobbyMemberManager(repositoryManager, mapper, logger));
             _LobbyService = new Lazy<ILobbyService>(() => new LobbyManager(repositoryManager, mapper, logger));
             _messageService = new Lazy<IMessageService>(() => new MessageManager(repositoryManager, mapper, logger));
             _authenticationService = new Lazy<IAuthenticationService>(() => new AuthenticationManager(configuration));
             _userService = new Lazy<IUserService>(() => new UserManager(repositoryManager, mapper, AuthenticationService, logger));
         }
 
-        public ILobbyUsersService LobbyUsersService => _lobbyUsersService.Value;
+        public ILobbyMemberService LobbyMemberService => _lobbyMemberService.Value;
         public ILobbyService LobbyService => _LobbyService.Value;
         public IMessageService MessageService => _messageService.Value;
         public IUserService UserService => _userService.Value;

@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using Entities.Dtos.LobbyUsers;
+using Entities.Dtos.LobbyMember;
 using Entities.Dtos.Message;
 using Entities.Dtos.Lobby;
 using Entities.Dtos.User;
@@ -37,9 +37,9 @@ namespace API.Utilities.AutoMapper
             CreateMap<LobbyDtoForUpdate, Lobby>().ReverseMap(); //PUT
 
 
-            CreateMap<LobbyUsers, LobbyUsersDto>()
+            CreateMap<LobbyMember, LobbyMemberDto>()
                 .ForMember(dest => dest.NickName, opt => opt.MapFrom(src => src.User.NickName)); //GET
-            CreateMap<LobbyUsersDtoForInsertion, LobbyUsers>(); //POST
+            CreateMap<LobbyMemberDtoForInsertion, LobbyMember>(); //POST
         }
     }
 }

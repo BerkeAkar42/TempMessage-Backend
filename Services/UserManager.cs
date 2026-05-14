@@ -31,7 +31,7 @@ namespace Services
         public async Task<UserAuthDto> CreateOneUserAsync(UserDtoForInsertion user)
         {
             //Her halükarda bir oda sonucunda hesap oluşturulacağı kanaatine vardık. Bu yüzden user --> CreateOneUserAsync(UserDtoForInsertion user, int expireMinutes) olacak şekilde ayarlanmalı.
-            //Bu metot LobbyUsers logic'inde kullanıcı eklenirken çağırılacak.
+            //Bu metot LobbyMember logic'inde kullanıcı eklenirken çağırılacak.
 
             var newUser = _mapper.Map<User>(user);
 

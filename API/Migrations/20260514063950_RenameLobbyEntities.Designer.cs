@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Repositories.EFCore;
 
@@ -11,9 +12,11 @@ using Repositories.EFCore;
 namespace API.Migrations
 {
     [DbContext(typeof(RepositoriesContext))]
-    partial class RepositoriesContextModelSnapshot : ModelSnapshot
+    [Migration("20260514063950_RenameLobbyEntities")]
+    partial class RenameLobbyEntities
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -49,9 +52,9 @@ namespace API.Migrations
                     b.ToTable("Lobby");
                 });
 
-            modelBuilder.Entity("Entities.Models.LobbyMember", b =>
+            modelBuilder.Entity("Entities.Models.LobbyUsers", b =>
                 {
-                    b.Property<Guid>("LobbyMemberId")
+                    b.Property<Guid>("LobbyUsersId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
@@ -64,13 +67,13 @@ namespace API.Migrations
                     b.Property<Guid>("UserId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.HasKey("LobbyMemberId");
+                    b.HasKey("LobbyUsersId");
 
                     b.HasIndex("LobbyId");
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("LobbyMember");
+                    b.ToTable("LobbyUsers");
                 });
 
             modelBuilder.Entity("Entities.Models.Message", b =>
@@ -133,7 +136,7 @@ namespace API.Migrations
                     b.ToTable("Users");
                 });
 
-            modelBuilder.Entity("Entities.Models.LobbyMember", b =>
+            modelBuilder.Entity("Entities.Models.LobbyUsers", b =>
                 {
                     b.HasOne("Entities.Models.Lobby", "Lobby")
                         .WithMany()

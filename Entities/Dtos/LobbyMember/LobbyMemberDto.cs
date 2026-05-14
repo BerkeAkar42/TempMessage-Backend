@@ -4,11 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Entities.Dtos.LobbyUsers
+namespace Entities.Dtos.LobbyMember
 {
-    public record LobbyUsersDto
+    public record LobbyMemberDto
     {
-        public Guid LobbyUsersId { get; set; }
+        public Guid LobbyMemberId { get; set; }
         public DateTime JoinedDate { get; init; }
         public Guid UserId { get; set; }
         public string? NickName { get; set; }

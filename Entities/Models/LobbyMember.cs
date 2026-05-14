@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace Entities.Models
 {
-    public class LobbyUsers
+    public class LobbyMember
     {
-        public Guid LobbyUsersId { get; set; }
+        public Guid LobbyMemberId { get; set; }
         public DateTime JoinedDate { get; init; }
 
         //FK tanımalamaları
@@ -18,9 +18,9 @@ namespace Entities.Models
         public User User { get; set; }
         public Lobby Lobby { get; set; }
 
-        public LobbyUsers()
+        public LobbyMember()
         {
-            LobbyUsersId = Guid.NewGuid();
+            LobbyMemberId = Guid.NewGuid();
             JoinedDate = DateTime.Now;
         }
     }
