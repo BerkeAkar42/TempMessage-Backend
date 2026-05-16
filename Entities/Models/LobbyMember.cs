@@ -11,6 +11,9 @@ namespace Entities.Models
         public Guid LobbyMemberId { get; set; }
         public DateTime JoinedDate { get; init; }
 
+        //Bir lobinin birden fazla admini olabilir...
+        public bool IsAdmin { get; set; }
+
         //FK tanımalamaları
         public Guid LobbyId { get; set; }
         public Guid UserId { get; set; }
@@ -21,7 +24,8 @@ namespace Entities.Models
         public LobbyMember()
         {
             LobbyMemberId = Guid.NewGuid();
-            JoinedDate = DateTime.Now;
+            JoinedDate = DateTime.UtcNow;
+            IsAdmin = false;
         }
     }
 }

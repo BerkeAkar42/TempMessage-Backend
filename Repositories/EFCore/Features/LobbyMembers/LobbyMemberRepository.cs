@@ -15,7 +15,7 @@ namespace Repositories.EFCore.Features.LobbyMembers
         public void CreateOneLobbyMember(LobbyMember lobbyMember) => Create(lobbyMember);
 
         public void DeleteOneLobbyMember(LobbyMember lobbyMember) => Delete(lobbyMember);
-        
+
 
         public async Task<IEnumerable<LobbyMember>> GetAllLobbyMembersAsync(bool trackChanges)
         {
@@ -28,7 +28,7 @@ namespace Repositories.EFCore.Features.LobbyMembers
             var lobbyMember = await FindByCondition(lb => lb.LobbyMemberId == id, trackChanges).FirstOrDefaultAsync();
             return lobbyMember;
         }
-        
+
 
         public void UpdateOneLobbyMember(LobbyMember lobbyMember) => Update(lobbyMember);
         

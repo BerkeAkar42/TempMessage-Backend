@@ -1,4 +1,5 @@
 ﻿using Entities.Models;
+using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using System;
@@ -9,15 +10,18 @@ using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
 
+
 namespace Services.Features.Authentication
 {
     public class AuthenticationManager : IAuthenticationService
     {
         private readonly IConfiguration _configuration;
+        private readonly IHttpContextAccessor _httpContextAccessor;
 
-        public AuthenticationManager(IConfiguration configuration)
+        public AuthenticationManager(IConfiguration configuration, IHttpContextAccessor httpContextAccessor)
         {
             _configuration = configuration;
+            _httpContextAccessor = httpContextAccessor;
         }
 
 
@@ -42,7 +46,7 @@ namespace Services.Features.Authentication
 
             // 3. Expiration: Süre hesabı (Oda süresi mi yoksa default mu?)
             var expiresValue = expireMinutes ?? int.Parse(jwtSettings["Expires"]);
-            var expires = DateTime.Now.AddMinutes(expiresValue);
+            var expires = DateTime.UtcNow.AddMinutes(expiresValue);
 
             // 4. Token Oluşturma
             var tokenOptions = new JwtSecurityToken(
@@ -54,6 +58,23 @@ namespace Services.Features.Authentication
             );
 
             return new JwtSecurityTokenHandler().WriteToken(tokenOptions);
+        }
+
+
+        //Lobby oluşturma logic için önemli
+        public Guid? GetUserIdFromCurrentContext() //Token içerisindeki id değerini alır.
+        {
+            // HttpContextAccessor üzerinden User nesnesine (Claim'lere) erişiyoruz
+            var user = _httpContextAccessor.HttpContext?.User;
+
+            if (user?.Identity?.IsAuthenticated == true)
+            {
+                var claimId = user.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+                if (Guid.TryParse(claimId, out Guid userId))
+                    return userId;
+            }
+
+            return null; // Token yoksa veya geçersizse sessizce null döner
         }
     }
 }

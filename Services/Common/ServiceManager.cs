@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Repositories.Context;
 using Services.Features.Authentication;
@@ -22,12 +23,12 @@ namespace Services.Common
         private readonly Lazy<IUserService> _userService;
         private readonly Lazy<IAuthenticationService> _authenticationService;
 
-        public ServiceManager(IRepositoryManager repositoryManager, IMapper mapper, IConfiguration configuration, ILoggerService logger)
+        public ServiceManager(IRepositoryManager repositoryManager, IMapper mapper, IConfiguration configuration, ILoggerService logger, IHttpContextAccessor httpContextAccessor)
         {
             _lobbyMemberService = new Lazy<ILobbyMemberService>(() => new LobbyMemberManager(repositoryManager, mapper, logger));
-            _LobbyService = new Lazy<ILobbyService>(() => new LobbyManager(repositoryManager, mapper, logger));
+            _LobbyService = new Lazy<ILobbyService>(() => new LobbyManager(repositoryManager, mapper, logger, AuthenticationService));
             _messageService = new Lazy<IMessageService>(() => new MessageManager(repositoryManager, mapper, logger));
-            _authenticationService = new Lazy<IAuthenticationService>(() => new AuthenticationManager(configuration));
+            _authenticationService = new Lazy<IAuthenticationService>(() => new AuthenticationManager(configuration, httpContextAccessor));
             _userService = new Lazy<IUserService>(() => new UserManager(repositoryManager, mapper, AuthenticationService, logger));
         }
 

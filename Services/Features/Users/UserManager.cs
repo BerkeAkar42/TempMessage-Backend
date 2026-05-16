@@ -29,12 +29,12 @@ namespace Services.Features.Users
         }
 
         //Bir kullanıcı oluşturur
-        public async Task<UserAuthDto> CreateOneUserAsync(UserDtoForInsertion user)
+        public async Task<UserAuthDto> CreateOneUserAsync(UserDtoForInsertion userDto)
         {
             //Her halükarda bir oda sonucunda hesap oluşturulacağı kanaatine vardık. Bu yüzden user --> CreateOneUserAsync(UserDtoForInsertion user, int expireMinutes) olacak şekilde ayarlanmalı.
             //Bu metot LobbyMember logic'inde kullanıcı eklenirken çağırılacak.
 
-            var newUser = _mapper.Map<User>(user);
+            var newUser = _mapper.Map<User>(userDto);
 
             _manager.User.CreateOneUser(newUser);
             await _manager.SaveAsync();
@@ -83,14 +83,14 @@ namespace Services.Features.Users
             return _mapper.Map<UserDto>(user);
         }
 
-        public async Task UpdateOneUserAsync(Guid id, UserDtoForUpdate user, bool trackChanges)
+        public async Task UpdateOneUserAsync(Guid id, UserDtoForUpdate userDto, bool trackChanges)
         {
             var currentUser = await _manager.User.GetOneUserByIdAsync(id, trackChanges); //trackChanges --> true olmalı. Veri değiştirilecek.
 
             if (currentUser is null)
                 throw new UserNotFoundException(id);
 
-            _mapper.Map(user, currentUser); //gelen user nesnemi al mevcut user'ımın üzerine yaz.
+            _mapper.Map(userDto, currentUser); //gelen user nesnemi al mevcut user'ımın üzerine yaz.
 
             _manager.User.UpdateOneUser(currentUser);
 
