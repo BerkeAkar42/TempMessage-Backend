@@ -10,6 +10,6 @@ namespace Entities.Dtos.Lobby
     public record CreateLobbyRequest
     {   //Body'den tek bir veri çekebiliriz. Ayrı ayrı isteklerde bulunamayız. O yüzden bu parametreleri tek bir arada tutuyoruz.
         public LobbyDtoForInsertion LobbyDto { get; set; }
-        public UserDtoForInsertion UserDto { get; set; }
+        public UserDtoForInsertion? UserDto { get; set; }
     }
 }
