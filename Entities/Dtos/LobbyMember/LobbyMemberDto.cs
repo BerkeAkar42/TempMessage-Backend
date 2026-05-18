@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Entities.Dtos.Lobby;
+using Entities.Dtos.User;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,8 +12,9 @@ namespace Entities.Dtos.LobbyMember
     {
         public Guid LobbyMemberId { get; set; }
         public DateTime JoinedDate { get; init; }
-        public Guid UserId { get; set; }
-        public string? NickName { get; set; }
-        public Guid LobbyId { get; set; }
+        public bool IsAdmin { get; set; }
+
+        public UserDto? User { get; set; }
+        public LobbyDto? Lobby { get; set; }
     }
 }

@@ -11,7 +11,19 @@ namespace Services.Features.Authentication
     {
         //User bilgileri gelecek.
         //Oda bilgileri gelmezse default olarak appsetting.json'daki "Expires" değeri baz alınsın.
+        
+        /// <summary>
+        /// Token üretir
+        /// </summary>
+        /// <param name="user"></param>
+        /// <param name="expireMinutes"></param>
+        /// <returns></returns>
         string GenerateToken(User user, int? expireMinutes = null); //Token üretir
+        
+        /// <summary>
+        /// Gelen token bilgisinden id'yi ayrıştırır. Token gelmezse null döner
+        /// </summary>
+        /// <returns></returns>
         Guid? GetUserIdFromCurrentContext(); //Token içerisindeki id'yi çözer
     }
 }
