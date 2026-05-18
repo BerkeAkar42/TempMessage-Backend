@@ -1,11 +1,7 @@
 ﻿using Entities.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace Repositories.EFCore.Features.Messages
 {
@@ -14,10 +10,21 @@ namespace Repositories.EFCore.Features.Messages
         public void Configure(EntityTypeBuilder<Message> builder)
         {
             builder.HasKey(m => m.MessageId); //PK
-            builder.Property(u => u.Content)
+            builder.Property(m => m.Content)
+                .IsRequired() //Boş olamaz.
+                .HasMaxLength(1000); //mesaj max 1000 karakter olacak
+            builder.Property(m => m.SendDate)
                 .IsRequired(); //Boş olamaz.
-            builder.Property(u => u.SendDate)
+            builder.Property(m => m.Type)
                 .IsRequired(); //Boş olamaz.
+
+            builder.HasOne<Message>() // Bir mesajın bir parent'ı olabilir, bir parent'ın birçok cevabı olabilir.
+                .WithMany()
+                .HasForeignKey(m => m.ParentMessageId)
+                .OnDelete(DeleteBehavior.Restrict); //Burası "Cascade" olmamalı
+
+            builder.HasQueryFilter(m => !m.IsDeleted); //Silinen mesajları getirmez.
+
 
             //FK Tanımlamaları
             builder.HasOne(m => m.User)

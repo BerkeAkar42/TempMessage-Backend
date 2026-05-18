@@ -10,10 +10,18 @@ namespace Services.Features.LobbyMembers
 {
     public interface ILobbyMemberService
     {
-        /// <inheritdoc />
+        /// <summary>
+        /// Kullanıcının aktif lobilerini getirir.
+        /// </summary>
+        /// <param name="userId"></param>
+        /// <returns></returns>
         Task<IEnumerable<LobbyMemberDto>> GetActiveMembershipsByUserIdAsync(Guid userId);
 
-        /// <inheritdoc />
+        /// <summary>
+        /// Bir lobinin tüm kullanıcılarını listeler.
+        /// </summary>
+        /// <param name="lobbyId"></param>
+        /// <returns></returns>
         Task<IEnumerable<UserDto>> GetLobbyParticipantsByLobbyIdAsync(Guid lobbyId);
     }
 }

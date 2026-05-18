@@ -13,19 +13,21 @@ namespace Repositories.EFCore.Features.LobbyMembers
     {
         public void Configure(EntityTypeBuilder<LobbyMember> builder)
         {
-            builder.HasKey(lu => lu.LobbyMemberId); //PK
-            builder.Property(u => u.JoinedDate)
+            builder.HasKey(lm => lm.LobbyMemberId); //PK
+            builder.Property(lm => lm.JoinedDate)
+                .IsRequired(); //Boş olamaz.
+            builder.Property(lm => lm.IsAdmin)
                 .IsRequired(); //Boş olamaz.
 
             //FK Tanımlamaları
-            builder.HasOne(lu => lu.User)
+            builder.HasOne(lm => lm.User)
                 .WithMany()
-                .HasForeignKey(lu => lu.UserId)
+                .HasForeignKey(lm => lm.UserId)
                 .OnDelete(DeleteBehavior.Cascade); // Kullanıcı silinirse bu lobi üyeliği de silinsin
 
-            builder.HasOne(lu => lu.Lobby)
+            builder.HasOne(lm => lm.Lobby)
                 .WithMany()
-                .HasForeignKey(lu => lu.LobbyId)
+                .HasForeignKey(lm => lm.LobbyId)
                 .OnDelete(DeleteBehavior.Cascade); // Lobi silinirse tüm üyelik kayıtları uçsun
         }
     }

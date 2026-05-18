@@ -17,15 +17,15 @@ namespace Repositories.EFCore.Features.LobbyMembers
         public void DeleteOneLobbyMember(LobbyMember lobbyMember) => Delete(lobbyMember);
 
 
-        public async Task<IEnumerable<LobbyMember>> GetAllLobbyMembersAsync(bool trackChanges)
-        {
-            var lobbies = await FindAll(trackChanges).ToListAsync();
-            return lobbies;
-        }
+        //public async Task<IEnumerable<LobbyMember>> GetAllLobbyMembersAsync(bool trackChanges)
+        //{
+        //    var lobbies = await FindAll(trackChanges).ToListAsync();
+        //    return lobbies;
+        //}
 
-        public async Task<LobbyMember> GetOneLobbyMemberByIdAsync(Guid id, bool trackChanges)
+        public async Task<LobbyMember> GetOneLobbyMemberByIdAsync(Guid userId, Guid lobbyId, bool trackChanges)
         {
-            var lobbyMember = await FindByCondition(lb => lb.LobbyMemberId == id, trackChanges).FirstOrDefaultAsync();
+            var lobbyMember = await FindByCondition(lm => lm.UserId == userId && lm.LobbyId == lobbyId, trackChanges).FirstOrDefaultAsync();
             return lobbyMember;
         }
 
