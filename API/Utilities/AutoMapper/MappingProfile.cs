@@ -37,8 +37,8 @@ namespace API.Utilities.AutoMapper
             CreateMap<LobbyDtoForUpdate, Lobby>().ReverseMap(); //PUT
 
 
-            CreateMap<LobbyMember, LobbyMemberDto>()
-                .ForMember(dest => dest.NickName, opt => opt.MapFrom(src => src.User.NickName)); //GET
+            CreateMap<LobbyMember, LobbyMemberDto>();
+                
             CreateMap<LobbyMemberDtoForInsertion, LobbyMember>(); //POST
         }
     }

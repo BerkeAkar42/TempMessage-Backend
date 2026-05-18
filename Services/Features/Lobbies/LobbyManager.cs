@@ -27,14 +27,7 @@ namespace Services.Features.Lobbies
         }
 
 
-        /// <summary>
-        /// Yeni lobby açma metotu.
-        /// </summary>
-        /// <param name="lobbyDto">Lobby bilgilerini içerir</param>
-        /// <param name="userDto">User bilgilerini içerir</param>
-        /// <param name="userIdFromToken">User token'a sahipse id döner. Yeni oluşturulan odalara göre user yaşam süresi hesaplanır</param>
-        /// <returns>LobbyAuthResponseDto (LobbyDto, UserDto)</returns>
-        /// <exception cref="UserNotFoundException">Kullanıcı bulunamdı hatası</exception>
+        /// <inheritdoc />
         public async Task<LobbyAuthResponseDto> CreateOneLobbyAsync(LobbyDtoForInsertion lobbyDto, UserDtoForInsertion userDto, Guid? userIdFromToken)
         {
             //Controllerda çağırırken şöyle kullan:
@@ -45,6 +38,9 @@ namespace Services.Features.Lobbies
             //var result = await _service.LobbyService.CreateOneLobbyAsync(lobi için gerekli parametreler, tokenId = userIdFromToken);
 
             //return Ok(result);
+
+            if (!userIdFromToken.HasValue && userDto is null)
+                throw new ArgumentException("No user information found. Please log in or enter a username.");
 
             User user;
 
@@ -89,16 +85,8 @@ namespace Services.Features.Lobbies
 
 
 
-        /// <summary>
-        /// Lobby'e katılma metotu
-        /// </summary>
-        /// <param name="lobbyId">Aktif olan lobinin id'si</param>
-        /// <param name="userDto">User bilgisi yoksa, user kayıt için alınan bilgiler</param>
-        /// <param name="userIdFromToken">User token'a sahipse id döner. Yeni oluşturulan odalara göre user yaşam süresi hesaplanır</param>
-        /// <returns>LobbyAuthResponseDto (LobbyDto, UserDto)</returns>
-        /// <exception cref="LobbyNotFoundException">Lobby bulunamadı hatası</exception>
-        /// <exception cref="UserNotFoundException">User bulunaamadı hatası</exception>
-        public async Task<LobbyAuthResponseDto> JoinLobbyAsync(Guid lobbyId, UserDtoForInsertion userDto, Guid? userIdFromToken)
+        /// <inheritdoc />
+        public async Task<LobbyAuthResponseDto> JoinLobbyAsync(Guid lobbyId, UserDtoForInsertion? userDto, Guid? userIdFromToken)
         {
             //Controllerda çağırırken şöyle kullan:
             //// 1. Kim bu adam? (Authentication servisine soruyoruz)
@@ -135,6 +123,9 @@ namespace Services.Features.Lobbies
             }
             else
             {
+                if (userDto is null || string.IsNullOrEmpty(userDto.NickName))
+                    throw new ArgumentException("You must provide a nickname to join the lobby.");
+
                 user = _mapper.Map<User>(userDto);
                 _manager.User.CreateOneUser(user);
                 _logger.LogInfo($"New guest user created for lobby join | Id: {user.UserId}");

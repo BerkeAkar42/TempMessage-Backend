@@ -46,7 +46,7 @@ namespace Services.Features.LobbyMembers
             if(lobby is null)
                 throw new LobbyNotFoundException(lobbyId);
 
-            var users = _manager.LobbyMember.GetLobbyParticipantsByLobbyIdAsync(lobbyId, false);
+            var users = await _manager.LobbyMember.GetLobbyParticipantsByLobbyIdAsync(lobbyId, false);
             
             return _mapper.Map<IEnumerable<UserDto>>(users);
         }

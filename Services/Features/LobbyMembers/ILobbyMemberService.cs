@@ -10,7 +10,10 @@ namespace Services.Features.LobbyMembers
 {
     public interface ILobbyMemberService
     {
+        /// <inheritdoc />
         Task<IEnumerable<LobbyMemberDto>> GetActiveMembershipsByUserIdAsync(Guid userId);
+
+        /// <inheritdoc />
         Task<IEnumerable<UserDto>> GetLobbyParticipantsByLobbyIdAsync(Guid lobbyId);
     }
 }
