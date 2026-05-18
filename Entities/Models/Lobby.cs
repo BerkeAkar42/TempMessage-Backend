@@ -17,7 +17,8 @@ namespace Entities.Models
         public Lobby()
         {
             LobbyId = Guid.NewGuid();
-            CreateDate = DateTime.Now;
+            CreateDate = DateTime.UtcNow;
+            IsActive = true;
         }
     }
 }

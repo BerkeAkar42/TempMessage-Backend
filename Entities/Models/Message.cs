@@ -24,7 +24,7 @@ namespace Entities.Models
         public Message()
         {
             MessageId = Guid.NewGuid();
-            SendDate = DateTime.Now;
+            SendDate = DateTime.UtcNow;
             IsEdited = false; //Daha düzenlenmedi.
         }
     }

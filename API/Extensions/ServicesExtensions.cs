@@ -66,6 +66,8 @@ namespace API.Extensions
                     IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(secretKey))
                 };
             });
+
+            services.AddHttpContextAccessor();
         }
 
         public static void ConfigureSwagger(this IServiceCollection services)

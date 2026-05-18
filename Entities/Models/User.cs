@@ -14,14 +14,14 @@ namespace Entities.Models
         public DateTime CreateDate { get; init; }
         public DateTime LastActiveDate { get; set; }
 
-        public bool IsOnline => (DateTime.Now - LastActiveDate).TotalMinutes < 5;
+        public bool IsOnline => (DateTime.UtcNow - LastActiveDate).TotalMinutes < 5;
 
         public User()
         {
             UserId = Guid.NewGuid(); // e02aa315-a436-41b9-92f4-5c3abb19d2ae
             AccessKey = Guid.NewGuid().ToString("N"); // e02aa315a43641b992f45c3abb19d2ae
-            CreateDate = DateTime.Now;
-            LastActiveDate = DateTime.Now;
+            CreateDate = DateTime.UtcNow;
+            LastActiveDate = DateTime.UtcNow;
         }
     }
 }
