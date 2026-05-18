@@ -11,7 +11,8 @@ namespace Repositories.EFCore.Features.LobbyMembers
         void UpdateOneLobbyMember(LobbyMember lobbyMember);
         void DeleteOneLobbyMember(LobbyMember lobbyMember);
         Task<bool> IsUserMemberOfLobbyAsync(Guid userId, Guid lobbyId, bool trackChanges);
-        Task<IEnumerable<LobbyMember>> GetActiveMembershipsAsync(Guid userId, bool trackChanges);
+        Task<IEnumerable<LobbyMember>> GetActiveMembershipsByUserIdAsync(Guid userId, bool trackChanges);
+        Task<IEnumerable<User>> GetLobbyParticipantsByLobbyIdAsync(Guid lobbyId, bool trackChanges);
     }
 
 }

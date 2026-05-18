@@ -29,20 +29,48 @@ namespace Repositories.EFCore.Features.LobbyMembers
             return lobbyMember;
         }
 
-        //User o lobinin üyesi mi?
+        /// <summary>
+        /// User o lobinin üyesi mi?
+        /// </summary>
+        /// <param name="userId"></param>
+        /// <param name="lobbyId"></param>
+        /// <param name="trackChanges"></param>
+        /// <returns></returns>
         public Task<bool> IsUserMemberOfLobbyAsync(Guid userId, Guid lobbyId, bool trackChanges) =>
             FindByCondition(lm => lm.LobbyId == lobbyId && lm.UserId == userId, trackChanges)
             .AnyAsync();
 
-        //Aktif tüm lobileri getirir
-        public async Task<IEnumerable<LobbyMember>> GetActiveMembershipsAsync(Guid userId, bool trackChanges) =>
+        /// <summary>
+        /// User'ın aktif tüm lobilerini getirir.
+        /// </summary>
+        /// <param name="userId"></param>
+        /// <param name="trackChanges"></param>
+        /// <returns></returns>
+        public async Task<IEnumerable<LobbyMember>> GetActiveMembershipsByUserIdAsync(Guid userId, bool trackChanges) =>
             await FindByCondition(lm => lm.UserId == userId && lm.Lobby.IsActive, trackChanges)
                 .Include(lm => lm.Lobby)
                 .ToListAsync();
 
 
         public void UpdateOneLobbyMember(LobbyMember lobbyMember) => Update(lobbyMember);
-        
+
+
+        /// <summary>
+        /// Bir lobbideki user entity'lerini listeler.
+        /// </summary>
+        /// <param name="lobbyId"></param>
+        /// <param name="trackChanges"></param>
+        /// <returns></returns>
+        /// <exception cref="NotImplementedException"></exception>
+        public async Task<IEnumerable<User>> GetLobbyParticipantsByLobbyIdAsync(Guid lobbyId, bool trackChanges) =>
+            //Mesajlaşma ekranında sağ tarafta  mini bir yer açıp oraya listeletebiliriz.
+            await FindByCondition(ml => ml.LobbyId == lobbyId, trackChanges)
+                //.Include(ml => ml.User)
+                .Select(ml=> ml.User)
+                .ToListAsync();
+
+
+
     }
 
 }

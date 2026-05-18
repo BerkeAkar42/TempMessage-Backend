@@ -4,7 +4,6 @@ using Entities.Dtos.User;
 using Entities.Exceptions.Lobby;
 using Entities.Exceptions.UserExceptions;
 using Entities.Models;
-using Microsoft.EntityFrameworkCore;
 using Repositories.Context;
 using Services.Common;
 using Services.Features.Authentication;
@@ -196,7 +195,7 @@ namespace Services.Features.Lobbies
         private async Task<int> GetMaxLobbyValidityPeriodAsync(Guid userId, Lobby currentLobby)
         {
             //Kullanıcının halihazırda üye olduğu AKTİF lobileri getir
-            var activeMemberships = await _manager.LobbyMember.GetActiveMembershipsAsync(userId, false);
+            var activeMemberships = await _manager.LobbyMember.GetActiveMembershipsByUserIdAsync(userId, false);
 
             //Mevcut lobileri ve yeni katılacağı lobiyi tek bir listede topla
             //Eğer kullanıcı zaten bu lobideyse listede mükerrer olmasın diye kontrol et
