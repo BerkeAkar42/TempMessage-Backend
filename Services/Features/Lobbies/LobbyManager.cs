@@ -125,9 +125,7 @@ namespace Services.Features.Lobbies
                     throw new UserNotFoundException(userIdFromToken.Value);
 
                 //Kullanıcı zaten bu lobinin üyesi mi? (Mükerrer kaydı önleme)
-                var isAlreadyMember = await _manager.LobbyMember
-                    .FindByCondition(lm => lm.LobbyId == lobbyId && lm.UserId == user.UserId, false)
-                    .AnyAsync();
+                var isAlreadyMember = await _manager.LobbyMember.IsUserMemberOfLobbyAsync(user.UserId, lobby.LobbyId, false);
 
                 if (isAlreadyMember)
                 {
@@ -198,10 +196,7 @@ namespace Services.Features.Lobbies
         private async Task<int> GetMaxLobbyValidityPeriodAsync(Guid userId, Lobby currentLobby)
         {
             //Kullanıcının halihazırda üye olduğu AKTİF lobileri getir
-            var activeMemberships = await _manager.LobbyMember
-                .FindByCondition(lm => lm.UserId == userId && lm.Lobby.IsActive, false)
-                .Include(lm => lm.Lobby)
-                .ToListAsync();
+            var activeMemberships = await _manager.LobbyMember.GetActiveMembershipsAsync(userId, false);
 
             //Mevcut lobileri ve yeni katılacağı lobiyi tek bir listede topla
             //Eğer kullanıcı zaten bu lobideyse listede mükerrer olmasın diye kontrol et

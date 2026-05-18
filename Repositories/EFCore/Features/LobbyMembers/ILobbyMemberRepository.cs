@@ -10,6 +10,8 @@ namespace Repositories.EFCore.Features.LobbyMembers
         void CreateOneLobbyMember(LobbyMember lobbyMember);
         void UpdateOneLobbyMember(LobbyMember lobbyMember);
         void DeleteOneLobbyMember(LobbyMember lobbyMember);
+        Task<bool> IsUserMemberOfLobbyAsync(Guid userId, Guid lobbyId, bool trackChanges);
+        Task<IEnumerable<LobbyMember>> GetActiveMembershipsAsync(Guid userId, bool trackChanges);
     }
 
 }
