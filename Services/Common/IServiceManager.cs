@@ -1,4 +1,5 @@
 ﻿using Services.Features.Authentication;
+using Services.Features.Authorization;
 using Services.Features.Lobbies;
 using Services.Features.LobbyMembers;
 using Services.Features.Messages;
@@ -18,5 +19,6 @@ namespace Services.Common
         IMessageService MessageService { get; }
         IUserService UserService { get; }
         IAuthenticationService AuthenticationService { get; }
+        IAuthorizationService AuthorizationService { get; }
     }
 }

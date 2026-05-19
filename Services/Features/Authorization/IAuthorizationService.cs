@@ -33,6 +33,6 @@ namespace Services.Features.Authorization
         /// <param name="userId"></param>
         /// <param name="lobbyId"></param>
         /// <returns></returns>
-        Task CheckLobbyOwnershipAsync(Guid userId, Guid lobbyId);
+        Task CheckLobbyAdminshipAsync(Guid userId, Guid lobbyId);
     }
 }

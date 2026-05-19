@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Repositories.Context;
 using Services.Features.Authentication;
+using Services.Features.Authorization;
 using Services.Features.Lobbies;
 using Services.Features.LobbyMembers;
 using Services.Features.Messages;
@@ -22,12 +23,14 @@ namespace Services.Common
         private readonly Lazy<IMessageService> _messageService;
         private readonly Lazy<IUserService> _userService;
         private readonly Lazy<IAuthenticationService> _authenticationService;
+        private readonly Lazy<IAuthorizationService> _authorizationService;
 
         public ServiceManager(IRepositoryManager repositoryManager, IMapper mapper, IConfiguration configuration, ILoggerService logger, IHttpContextAccessor httpContextAccessor)
         {
+            _authorizationService = new Lazy<IAuthorizationService>(() => new AuthorizationManager(repositoryManager));
             _lobbyMemberService = new Lazy<ILobbyMemberService>(() => new LobbyMemberManager(repositoryManager, mapper, logger));
             _LobbyService = new Lazy<ILobbyService>(() => new LobbyManager(repositoryManager, mapper, logger, AuthenticationService));
-            _messageService = new Lazy<IMessageService>(() => new MessageManager(repositoryManager, mapper, logger));
+            _messageService = new Lazy<IMessageService>(() => new MessageManager(repositoryManager, mapper, logger, AuthorizationService));
             _authenticationService = new Lazy<IAuthenticationService>(() => new AuthenticationManager(configuration, httpContextAccessor));
             _userService = new Lazy<IUserService>(() => new UserManager(repositoryManager, mapper, AuthenticationService, logger));
         }
@@ -37,5 +40,6 @@ namespace Services.Common
         public IMessageService MessageService => _messageService.Value;
         public IUserService UserService => _userService.Value;
         public IAuthenticationService AuthenticationService => _authenticationService.Value;
+        public IAuthorizationService AuthorizationService => _authorizationService.Value;
     }
 }

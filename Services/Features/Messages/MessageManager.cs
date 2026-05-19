@@ -8,6 +8,7 @@ using Entities.RequestFeatures;
 using Entities.RequestFeatures.Messages;
 using Repositories.Context;
 using Services.Common;
+using Services.Features.Authorization;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,12 +22,14 @@ namespace Services.Features.Messages
         private readonly IRepositoryManager _manager;
         private readonly IMapper _mapper;
         private readonly ILoggerService _logger;
+        private readonly IAuthorizationService _authorizationService;
 
-        public MessageManager(IRepositoryManager manager, IMapper mapper, ILoggerService logger)
+        public MessageManager(IRepositoryManager manager, IMapper mapper, ILoggerService logger, IAuthorizationService authorizationService)
         {
             _manager = manager;
             _mapper = mapper;
             _logger = logger;
+            _authorizationService = authorizationService;
         }
 
         public async Task<MessageDto> CreateOneMessageAsync(Guid lobbyId, Guid? userIdFromToken, MessageDtoForInsertion messageDto)

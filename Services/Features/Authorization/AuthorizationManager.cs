@@ -16,6 +16,7 @@ namespace Services.Features.Authorization
             _manager = manager;
         }
 
+        /// <inheritdoc />
         public async Task CheckLobbyAccessAsync(Guid userId, Guid lobbyId)
         {
             var lobby = await _manager.Lobby.GetOneLobbyByIdAsync(lobbyId, false);
@@ -29,17 +30,19 @@ namespace Services.Features.Authorization
                 throw new ForbiddenException("Unauthorized access request");
         }
 
-        public async Task CheckLobbyOwnershipAsync(Guid userId, Guid lobbyId)
+        /// <inheritdoc />
+        public async Task CheckLobbyAdminshipAsync(Guid userId, Guid lobbyId)
         {
             var lobby = await _manager.Lobby.GetOneLobbyByIdAsync(lobbyId, false);
             if (lobby is null)
                 throw new LobbyNotFoundException(lobbyId);
 
             var lobbyMember = await _manager.LobbyMember.GetOneLobbyMemberByIdAsync(userId, lobbyId, false);
-            if(lobbyMember.UserId != userId && lobbyMember.IsAdmin != true)
+            if(lobbyMember is null || !lobbyMember.IsAdmin)
                 throw new ForbiddenException("Unauthorized access request");
         }
 
+        /// <inheritdoc />
         public async Task CheckMessageOwnershipAsync(Guid userId, Guid messageId)
         {
             var message = await _manager.Message.GetOneMessageByIdAsync(messageId, false);
