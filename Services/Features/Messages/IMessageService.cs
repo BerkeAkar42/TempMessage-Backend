@@ -24,7 +24,7 @@ namespace Services.Features.Messages
         /// </summary>
         /// <param name="messageDto"></param>
         /// <returns></returns>
-        Task<MessageDto> CreateOneMessageAsync(MessageDtoForInsertion messageDto);
+        Task<MessageDto> CreateOneMessageAsync(Guid lobbyId, Guid? userIdFromToken, MessageDtoForInsertion messageDto);
 
         /// <summary>
         /// İlgili lobideki bir mesajı günceller
@@ -32,7 +32,7 @@ namespace Services.Features.Messages
         /// <param name="messageDto"></param>
         /// <param name="trackChanges"></param>
         /// <returns></returns>
-        Task UpdateOneMessageAsync(Guid messageId, MessageDtoForUpdate messageDto);
+        Task UpdateOneMessageAsync(Guid lobbyId, Guid? userIdFromToken, MessageDtoForUpdate messageDto);
 
 
         /// <summary>
@@ -41,6 +41,6 @@ namespace Services.Features.Messages
         /// <param name="messageId"></param>
         /// <param name="trackChanges"></param>
         /// <returns></returns>
-        Task<MessageDto> DeleteOneMessageAsync(Guid messageId);
+        Task<MessageDto> DeleteOneMessageAsync(Guid messageId, Guid? userIdFromToken, Guid lobbyId);
     }
 }
