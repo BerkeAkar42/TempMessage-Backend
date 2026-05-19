@@ -21,8 +21,8 @@ namespace Services.Features.Lobbies
         Task<LobbyAuthResponseDto> CreateOneLobbyAsync(LobbyDtoForInsertion lobbyDto, UserDtoForInsertion userDto, Guid? userIdFromToken);
 
         
-        Task UpdateOneLobbyAsync(LobbyDtoForUpdate lobbyDto, bool trackChanges);
-        Task DeleteOneLobbyAsync(Guid id, bool trackChanges);
+        Task UpdateOneLobbyAsync(LobbyDtoForUpdate lobbyDto);
+        Task DeleteOneLobbyAsync(Guid id);
 
 
         /// <summary>
