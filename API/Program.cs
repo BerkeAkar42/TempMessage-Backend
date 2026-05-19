@@ -36,21 +36,13 @@ namespace API
             //Authorization => Bulunan kullanýcýnýn bu kaynaða eriþme hakký var mý?, onu kontrol eder
             //------------------------------------
 
-            //cors iþlemleri => tarayýcýnýn güvenlik önlemi ötürüsü bu adrese gelen isteklere izin verdik.
-            builder.Services.AddCors(options =>
-            {
-                options.AddPolicy("AllowLocalHost", policy =>
-                {
-                    policy.WithOrigins("http://localhost:5000")
-                    .AllowAnyHeader()
-                    .AllowAnyMethod();
-                });
-            });
+
 
 
 
             //Servis kayýtlarý
             //---------------------------------------------------------------//
+            builder.Services.ConfigureCors(); //cors iþlemleri - tarayýcýdan gelen isteklere izin verdik
             builder.Services.ConfigureJWTService(builder.Configuration); //JWT Token Configure
             builder.Services.ConfigureSwagger(); //Swagger Auth Config
             builder.Services.ConfigureSqlContext(builder.Configuration); //SQL Connection String
@@ -80,7 +72,7 @@ namespace API
             app.UseAuthorization(); //"Buraya girmeye yetkin var mý?"
 
             //Cors iþlemine izin verdik.
-            app.UseCors("AllowLocalHost");
+            app.UseCors("CorsPolicy");
 
             app.MapControllers();
             

@@ -19,11 +19,18 @@ namespace Services.Features.Authentication
         /// <param name="expireMinutes"></param>
         /// <returns></returns>
         string GenerateToken(User user, int? expireMinutes = null); //Token üretir
-        
+
         /// <summary>
-        /// Gelen token bilgisinden id'yi ayrıştırır. Token gelmezse null döner
+        /// Hesabı zaten olan veya ilk defa sisteme giriş yapmaya çalışan kullanıcıları ayırt eder. Kullanıcının token'ı yoksa geriye null döner
         /// </summary>
         /// <returns></returns>
         Guid? GetUserIdFromCurrentContext(); //Token içerisindeki id'yi çözer
+
+        /// <summary>
+        /// Kullanıcının token'ını kontrol eder. Doğrulanamazsa hata fırlatır.
+        /// </summary>
+        /// <returns></returns>
+        /// <exception cref="UnauthorizedAccessException"></exception>
+        Guid GetUserId();
     }
 }
