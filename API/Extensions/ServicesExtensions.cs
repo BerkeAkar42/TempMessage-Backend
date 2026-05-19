@@ -41,6 +41,23 @@ namespace API.Extensions
         }
 
 
+        //API'mıza kimlerin istek atabilecekleri hakkında polisies (kurallar / politikalar) yazıyoruz
+        public static void ConfigureCors(this IServiceCollection services)
+        {
+            //cors işlemleri => tarayıcının güvenlik önlemi ötürüsü bu adrese gelen isteklere izin verdik.
+            services.AddCors(options =>
+            {
+                options.AddPolicy("CorsPolicy", policy =>
+                {
+                    policy.WithOrigins("http://localhost:5000")
+                    .AllowAnyHeader()
+                    .AllowAnyMethod()
+                    .WithExposedHeaders("X-Pagination");
+                });
+            });
+        }
+
+
         public static void ConfigureJWTService(this IServiceCollection services, IConfiguration configuration)
         {
             // 1. JWT Ayarlarını Al
