@@ -52,9 +52,9 @@ namespace Services.Features.Users
         }
 
         //Bir kullanıcı siler.
-        public async Task DeleteOneUserAsync(Guid id, bool trackChanges)
+        public async Task DeleteOneUserAsync(Guid id)
         {
-            var user = await _manager.User.GetOneUserByIdAsync(id, trackChanges); //trackChanges --> true
+            var user = await _manager.User.GetOneUserByIdAsync(id, true); //trackChanges --> true
 
             if (user is null)
                 throw new UserNotFoundException(id);
@@ -66,16 +66,16 @@ namespace Services.Features.Users
         }
 
         //Tüm kullanıcıları getirir
-        public async Task<IEnumerable<UserDto>> GetAllUsersAsync(bool trackChanges)
+        public async Task<IEnumerable<UserDto>> GetAllUsersAsync()
         {
-            var users = await _manager.User.GetAllUsersAsync(trackChanges);
+            var users = await _manager.User.GetAllUsersAsync(false);
             return _mapper.Map<IEnumerable<UserDto>>(users);
         }
 
         //Tek bir kullanıcıyı getirir
-        public async Task<UserDto> GetOneUserByIdAsync(Guid id, bool trackChanges)
+        public async Task<UserDto> GetOneUserByIdAsync(Guid id)
         {
-            var user = await _manager.User.GetOneUserByIdAsync(id, trackChanges);
+            var user = await _manager.User.GetOneUserByIdAsync(id, false);
 
             if (user is null)
                 throw new UserNotFoundException(id);
@@ -83,9 +83,9 @@ namespace Services.Features.Users
             return _mapper.Map<UserDto>(user);
         }
 
-        public async Task UpdateOneUserAsync(Guid id, UserDtoForUpdate userDto, bool trackChanges)
+        public async Task UpdateOneUserAsync(Guid id, UserDtoForUpdate userDto)
         {
-            var currentUser = await _manager.User.GetOneUserByIdAsync(id, trackChanges); //trackChanges --> true olmalı. Veri değiştirilecek.
+            var currentUser = await _manager.User.GetOneUserByIdAsync(id, true); //trackChanges --> true olmalı. Veri değiştirilecek.
 
             if (currentUser is null)
                 throw new UserNotFoundException(id);

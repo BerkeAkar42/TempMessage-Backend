@@ -215,9 +215,9 @@ namespace Services.Features.Lobbies
 
 
 
-        public async Task DeleteOneLobbyAsync(Guid id, bool trackChanges)
+        public async Task DeleteOneLobbyAsync(Guid id)
         {
-            var lobby = await _manager.Lobby.GetOneLobbyByIdAsync(id, trackChanges);
+            var lobby = await _manager.Lobby.GetOneLobbyByIdAsync(id, true);
 
             if (lobby is null)
                 throw new LobbyNotFoundException(id);
@@ -230,9 +230,9 @@ namespace Services.Features.Lobbies
 
 
 
-        public async Task UpdateOneLobbyAsync(LobbyDtoForUpdate lobbyDto, bool trackChanges)
+        public async Task UpdateOneLobbyAsync(LobbyDtoForUpdate lobbyDto)
         {
-            var currentLobby = await _manager.Lobby.GetOneLobbyByIdAsync(lobbyDto.LobbyId, trackChanges);
+            var currentLobby = await _manager.Lobby.GetOneLobbyByIdAsync(lobbyDto.LobbyId, true);
 
             if (currentLobby is null)
                 throw new LobbyNotFoundException(lobbyDto.LobbyId);

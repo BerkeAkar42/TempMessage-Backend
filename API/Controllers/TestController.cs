@@ -33,7 +33,7 @@ namespace API.Controllers
         [HttpGet]
         public async Task<IActionResult> GetAllUsers()
         {
-            var users = await _service.UserService.GetAllUsersAsync(false);
+            var users = await _service.UserService.GetAllUsersAsync();
             return Ok(users);
         }
 
@@ -44,7 +44,7 @@ namespace API.Controllers
             if(id == Guid.Empty)
                 return BadRequest();
 
-            await _service.UserService.DeleteOneUserAsync(id, true);
+            await _service.UserService.DeleteOneUserAsync(id);
             return NoContent();
         }
 
@@ -55,7 +55,7 @@ namespace API.Controllers
             if (newUser is null)
                 return BadRequest();
 
-            await _service.UserService.UpdateOneUserAsync(newUser.UserId, newUser, true);
+            await _service.UserService.UpdateOneUserAsync(newUser.UserId, newUser);
             return NoContent();
         }
     }

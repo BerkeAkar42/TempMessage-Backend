@@ -26,8 +26,7 @@ namespace API.Utilities.AutoMapper
             CreateMap<UserDtoForUpdate, User>().ReverseMap(); //PUT
 
 
-            CreateMap<Message, MessageDto>()
-                .ForMember(dest => dest.NickName, opt => opt.MapFrom(src => src.User.NickName)); //GET
+            CreateMap<Message, MessageDto>(); //GET
             CreateMap<MessageDtoForUpdate, Message>().ReverseMap(); //PUT
             CreateMap<MessageDtoForInsertion, Message>(); //POST
 

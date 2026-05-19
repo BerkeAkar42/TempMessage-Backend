@@ -61,7 +61,7 @@ namespace Services.Features.Authentication
         }
 
 
-        //Lobby oluşturma logic için önemli
+        /// <inheritdoc />
         public Guid? GetUserIdFromCurrentContext() //Token içerisindeki id değerini alır.
         {
             // HttpContextAccessor üzerinden User nesnesine (Claim'lere) erişiyoruz
@@ -75,6 +75,23 @@ namespace Services.Features.Authentication
             }
 
             return null; // Token yoksa veya geçersizse sessizce null döner
+        }
+
+
+        /// <inheritdoc />
+        public Guid GetUserId()
+        {
+            var user = _httpContextAccessor.HttpContext?.User;
+
+            if (user?.Identity?.IsAuthenticated != true)
+                throw new UnauthorizedAccessException("The token could not be verified.");
+
+            var claimId = user.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+
+            if (!Guid.TryParse(claimId, out Guid userId))
+                throw new UnauthorizedAccessException("The token user information is invalid.");
+
+            return userId;
         }
     }
 }

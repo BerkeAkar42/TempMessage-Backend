@@ -1,4 +1,7 @@
-﻿using System;
+﻿using Entities.Dtos.Lobby;
+using Entities.Dtos.User;
+using Entities.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,14 +13,15 @@ namespace Entities.Dtos.Message
     public record MessageDto
     {
         public Guid MessageId { get; init; }
-        public string? Content { get; set; }
+        public string Content { get; set; }
         public DateTime SendDate { get; init; }
         public bool IsEdited { get; set; }
-        //public bool UpdateDate { get; set; }
+        public DateTime? UpdateDate { get; set; }
+        public bool IsDeleted { get; set; }
+        public MessageType Type { get; set; }
+        public Guid? ParentMessageId { get; set; }
 
-        //FK tanımalamaları
-        public Guid UserId { get; set; }
-        public string? NickName { get; set; }
-        public Guid LobbyId { get; set; }
+        public UserDto? User { get; set; }
+        public LobbyDto? Lobby { get; set; }
     }
 }
