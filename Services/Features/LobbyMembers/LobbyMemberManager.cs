@@ -5,6 +5,7 @@ using Entities.Exceptions.Lobby;
 using Entities.Exceptions.UserExceptions;
 using Repositories.Context;
 using Services.Common;
+using Services.Features.Authorization;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,16 +19,20 @@ namespace Services.Features.LobbyMembers
         private readonly IRepositoryManager _manager;
         private readonly IMapper _mapper;
         private readonly ILoggerService _logger;
+        private readonly IAuthorizationService _authorizationService;
 
-        public LobbyMemberManager(IRepositoryManager manager, IMapper mapper, ILoggerService logger)
+        public LobbyMemberManager(IRepositoryManager manager, IMapper mapper, ILoggerService logger, IAuthorizationService authorizationService)
         {
             _manager = manager;
             _mapper = mapper;
             _logger = logger;
+            _authorizationService = authorizationService;
         }
 
         public async Task<IEnumerable<LobbyMemberDto>> GetActiveMembershipsByUserIdAsync(Guid userId)
         {
+
+
             var user = await _manager.User.GetOneUserByIdAsync(userId, false);
 
             if (user is null)
@@ -39,8 +44,11 @@ namespace Services.Features.LobbyMembers
             return _mapper.Map<IEnumerable<LobbyMemberDto>>(userLobbies);
         }
 
-        public async Task<IEnumerable<UserDto>> GetLobbyParticipantsByLobbyIdAsync(Guid lobbyId)
-        {   //Lobby içerisindeki kullanıcıları listeler
+        public async Task<IEnumerable<UserDto>> GetLobbyParticipantsByLobbyIdAsync(Guid lobbyId, Guid userId)
+        {   
+            await _authorizationService.CheckLobbyAccessAsync(userId, lobbyId);
+
+            //Lobby içerisindeki kullanıcıları listeler
             var lobby = await _manager.Lobby.GetOneLobbyByIdAsync(lobbyId, false);
 
             if(lobby is null)

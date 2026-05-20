@@ -22,6 +22,6 @@ namespace Services.Features.LobbyMembers
         /// </summary>
         /// <param name="lobbyId"></param>
         /// <returns></returns>
-        Task<IEnumerable<UserDto>> GetLobbyParticipantsByLobbyIdAsync(Guid lobbyId);
+        Task<IEnumerable<UserDto>> GetLobbyParticipantsByLobbyIdAsync(Guid lobbyId, Guid userId);
     }
 }

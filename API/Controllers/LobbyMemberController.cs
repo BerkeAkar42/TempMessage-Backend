@@ -21,9 +21,11 @@ namespace API.Controllers
         /// <summary>
         /// Belirli bir kullanıcının tüm AKTİF lobilerini listeler (Sol Panel).
         /// </summary>
-        [HttpGet("user/{userId:guid}")]
-        public async Task<IActionResult> GetActiveMembershipsByUserId([FromRoute] Guid userId)
+        [HttpGet("user")]
+        public async Task<IActionResult> GetActiveMembershipsByUserId()
         {
+            var userId = _service.AuthenticationService.GetUserId();
+
             var result = await _service.LobbyMemberService.GetActiveMembershipsByUserIdAsync(userId);
             return Ok(result);
         }
@@ -34,7 +36,9 @@ namespace API.Controllers
         [HttpGet("lobby/{lobbyId:guid}/participants")]
         public async Task<IActionResult> GetLobbyParticipantsByLobbyId([FromRoute] Guid lobbyId)
         {
-            var result = await _service.LobbyMemberService.GetLobbyParticipantsByLobbyIdAsync(lobbyId);
+            var userId = _service.AuthenticationService.GetUserId();
+
+            var result = await _service.LobbyMemberService.GetLobbyParticipantsByLobbyIdAsync(lobbyId, userId);
             return Ok(result);
         }
     }

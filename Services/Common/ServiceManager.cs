@@ -28,7 +28,7 @@ namespace Services.Common
         public ServiceManager(IRepositoryManager repositoryManager, IMapper mapper, IConfiguration configuration, ILoggerService logger, IHttpContextAccessor httpContextAccessor)
         {
             _authorizationService = new Lazy<IAuthorizationService>(() => new AuthorizationManager(repositoryManager));
-            _lobbyMemberService = new Lazy<ILobbyMemberService>(() => new LobbyMemberManager(repositoryManager, mapper, logger));
+            _lobbyMemberService = new Lazy<ILobbyMemberService>(() => new LobbyMemberManager(repositoryManager, mapper, logger, AuthorizationService));
             _LobbyService = new Lazy<ILobbyService>(() => new LobbyManager(repositoryManager, mapper, logger, AuthenticationService));
             _messageService = new Lazy<IMessageService>(() => new MessageManager(repositoryManager, mapper, logger, AuthorizationService));
             _authenticationService = new Lazy<IAuthenticationService>(() => new AuthenticationManager(configuration, httpContextAccessor));
