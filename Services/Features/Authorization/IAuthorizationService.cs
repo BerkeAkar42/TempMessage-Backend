@@ -11,6 +11,7 @@ namespace Services.Features.Authorization
     /// </summary>
     public interface IAuthorizationService
     {
+        #region Lobby Doğrulama Metotları
         /// <summary>
         /// "Kullanıcı bu lobby'nin üyesi mi?" kontrol eder
         /// </summary>
@@ -19,13 +20,6 @@ namespace Services.Features.Authorization
         /// <returns></returns>
         Task CheckLobbyAccessAsync(Guid userId, Guid lobbyId);
 
-        /// <summary>
-        /// "Kullanıcı mesajın sahibi mi?" kontrol eder
-        /// </summary>
-        /// <param name="userId"></param>
-        /// <param name="messageId"></param>
-        /// <returns></returns>
-        Task CheckMessageOwnershipAsync(Guid userId, Guid messageId);
 
         /// <summary>
         /// "Kullanıcı lobby owner mı?" kontrol eder
@@ -34,5 +28,16 @@ namespace Services.Features.Authorization
         /// <param name="lobbyId"></param>
         /// <returns></returns>
         Task CheckLobbyAdminshipAsync(Guid userId, Guid lobbyId);
+        #endregion
+
+        #region Message Doğrulama Metotları
+        /// <summary>
+        /// "Kullanıcı mesajın sahibi mi?" kontrol eder
+        /// </summary>
+        /// <param name="userId"></param>
+        /// <param name="messageId"></param>
+        /// <returns></returns>
+        Task CheckMessageOwnershipAsync(Guid userId, Guid messageId);
+        #endregion
     }
 }

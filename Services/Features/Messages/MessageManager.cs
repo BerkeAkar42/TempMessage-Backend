@@ -9,11 +9,6 @@ using Entities.RequestFeatures.Messages;
 using Repositories.Context;
 using Services.Common;
 using Services.Features.Authorization;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Services.Features.Messages
 {
@@ -32,21 +27,22 @@ namespace Services.Features.Messages
             _authorizationService = authorizationService;
         }
 
-        public async Task<MessageDto> CreateOneMessageAsync(Guid lobbyId, Guid? userIdFromToken, MessageDtoForInsertion messageDto)
+        public async Task<MessageDto> CreateOneMessageAsync(Guid lobbyId, Guid userId, MessageDtoForInsertion messageDto)
         {
-            //Authorization olacak
+            //Authorization
+            await _authorizationService.CheckLobbyAccessAsync(userId, lobbyId);
 
             var lobby = await _manager.Lobby.GetOneLobbyByIdAsync(lobbyId, false);
             if (lobby is null)
                 throw new LobbyNotFoundException(lobbyId);
 
-            var user = await _manager.User.GetOneUserByIdAsync(userIdFromToken.Value, false);
+            var user = await _manager.User.GetOneUserByIdAsync(userId, false);
             if (user is null)
-                throw new UserNotFoundException(lobbyId);
+                throw new UserNotFoundException(userId);
 
             var message = _mapper.Map<Message>(messageDto);
 
-            message.UserId = userIdFromToken.Value;
+            message.UserId = userId;
             message.LobbyId = lobbyId;
 
             _manager.Message.CreateOneMessage(message);
@@ -59,13 +55,14 @@ namespace Services.Features.Messages
             return _mapper.Map<MessageDto>(message);
         }
 
-        public async Task<MessageDto> DeleteOneMessageAsync(Guid messageId, Guid? userIdFromToken, Guid lobbyId)
+        public async Task<MessageDto> DeleteOneMessageAsync(Guid messageId, Guid userId, Guid lobbyId)
         {
             //Authorization olacak
+            await _authorizationService.CheckMessageOwnershipAsync(userId, messageId);
 
-            var user = await _manager.User.GetOneUserByIdAsync(userIdFromToken.Value, false);
+            var user = await _manager.User.GetOneUserByIdAsync(userId, false);
             if (user is null)
-                throw new UserNotFoundException(userIdFromToken.Value);
+                throw new UserNotFoundException(userId);
 
             var lobby = await _manager.Lobby.GetOneLobbyByIdAsync(lobbyId, false);
             if (lobby is null)
@@ -87,8 +84,11 @@ namespace Services.Features.Messages
             return _mapper.Map<MessageDto>(message);
         }
 
-        public async Task<(IEnumerable<MessageDto> messages, MetaData metaData)> GetMessagesByLobbyIdAsync(Guid lobbyId, MessageParameters messageParameters)
+        public async Task<(IEnumerable<MessageDto> messages, MetaData metaData)> GetMessagesByLobbyIdAsync(Guid lobbyId, Guid userId, MessageParameters messageParameters)
         {
+            //Authorization olacak
+            await _authorizationService.CheckLobbyAccessAsync(userId, lobbyId);
+
             //Message ve meta data bilgilerini çek
             var messagesWithMetaData = await _manager.Message.GetMessagesByLobbyIdAsync(lobbyId, messageParameters, false);
 
@@ -99,9 +99,10 @@ namespace Services.Features.Messages
             return (messageDto, messagesWithMetaData.MetaData);
         }
 
-        public async Task UpdateOneMessageAsync(Guid lobbyId, Guid? userIdFromToken, MessageDtoForUpdate messageDto)
+        public async Task UpdateOneMessageAsync(Guid lobbyId, Guid userId, MessageDtoForUpdate messageDto)
         {
             //Authorization olacak
+            await _authorizationService.CheckMessageOwnershipAsync(userId, messageDto.MessageId);
 
             var lobby = await _manager.Lobby.GetOneLobbyByIdAsync(lobbyId, false);
             if (lobby is null)

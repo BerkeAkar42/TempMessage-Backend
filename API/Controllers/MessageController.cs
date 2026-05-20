@@ -25,7 +25,9 @@ namespace API.Controllers
         [HttpGet("lobby/{lobbyId:guid}")]
         public async Task<IActionResult> GetMessagesByLobbyId([FromRoute] Guid lobbyId, [FromQuery] MessageParameters messageParameters)
         {
-            var pagedResult = await _service.MessageService.GetMessagesByLobbyIdAsync(lobbyId, messageParameters);
+            var userId = _service.AuthenticationService.GetUserId();
+
+            var pagedResult = await _service.MessageService.GetMessagesByLobbyIdAsync(lobbyId, userId, messageParameters);
 
             // Zafer Hoca'nın meşhur Header dokunuşu
             Response.Headers.Add("X-Pagination", JsonSerializer.Serialize(pagedResult.metaData));
@@ -38,9 +40,9 @@ namespace API.Controllers
         [HttpPost("lobby/{lobbyId:guid}")]
         public async Task<IActionResult> CreateMessage([FromRoute] Guid lobbyId, [FromBody] MessageDtoForInsertion messageDto)
         {
-            var userIdFromToken = _service.AuthenticationService.GetUserIdFromCurrentContext();
+            var userId = _service.AuthenticationService.GetUserId();
 
-            var message = await _service.MessageService.CreateOneMessageAsync(lobbyId, userIdFromToken, messageDto);
+            var message = await _service.MessageService.CreateOneMessageAsync(lobbyId, userId, messageDto);
 
             // Gerçek bir REST API'de CreatedAtRoute veya CreatedAtAction dönmek daha şıktır
             return StatusCode(201, message);
@@ -51,20 +53,20 @@ namespace API.Controllers
         [HttpPut("lobby/{lobbyId:guid}")]
         public async Task<IActionResult> UpdateMessage([FromRoute] Guid lobbyId, [FromBody] MessageDtoForUpdate messageDto)
         {
-            var userIdFromToken = _service.AuthenticationService.GetUserIdFromCurrentContext();
+            var userId = _service.AuthenticationService.GetUserId();
 
-            await _service.MessageService.UpdateOneMessageAsync(lobbyId, userIdFromToken, messageDto);
+            await _service.MessageService.UpdateOneMessageAsync(lobbyId, userId, messageDto);
             return NoContent(); // 204 döneriz
         }
 
         // 4. Mesaj Sil (Soft Delete)
         // DELETE: api/messages/{id}
-        [HttpDelete("lobby/{lobbyId:guid}")]
-        public async Task<IActionResult> DeleteMessage([FromRoute] Guid lobbyId, [FromBody] Guid messageId)
+        [HttpDelete("lobby/{lobbyId:guid}/message/{messageId:guid}")]
+        public async Task<IActionResult> DeleteMessage([FromRoute] Guid lobbyId, [FromRoute] Guid messageId)
         {
-            var userIdFromToken = _service.AuthenticationService.GetUserIdFromCurrentContext();
+            var userId = _service.AuthenticationService.GetUserId();
 
-            var result = await _service.MessageService.DeleteOneMessageAsync(messageId, userIdFromToken, lobbyId);
+            var result = await _service.MessageService.DeleteOneMessageAsync(messageId, userId, lobbyId);
             return Ok(result); // Silindi bilgisini (IsDeleted: true) dönmek için 200 Ok
         }
     }
